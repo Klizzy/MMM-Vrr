@@ -34,11 +34,10 @@ var config = {
     ]
 }
 ```
-
 ## Configuration options
 
 | Option           | Description | Options |
-|----------------- |------------------------------
+|----------------- |---|---
 | `city`           | *Required* German City Name `String` (**default**: Düsseldorf) | Any City Name in North Rhine-Westphalia
 | `station`        | *Required* German Station Name `String` (**default**: Hauptbahnhof) | Any Station Name in North Rhine-Westphalia
 | `numberOfResults`| *Optional* Number of results to be displayed `Int` (**default**: 10) | *
