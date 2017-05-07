@@ -1,0 +1,16 @@
+/*
+ *
+ * MMM-Vrr
+ *
+ * Steven Zemelka <hello@zemelka.codes>
+ * MIT Licensed.
+ *
+ *
+ */
+
+.mmm-vrr-table > tr {
+    padding-bottom: 5px;
+}
+.mmm-vrr-table  td {
+    padding-left: 20px;
+}
