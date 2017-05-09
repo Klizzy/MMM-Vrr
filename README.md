@@ -2,9 +2,9 @@
 
 This is a module for the [MagicMirror²](https://github.com/MichMich/MagicMirror/).
 
-Displays the next departure times of Trains, subway and Busses from any city and station in the german federal state North Rhine-Westphalia
+Displays the next departure times of Trains, subway and Busses from any city and station in the german federal state North Rhine-Westphalia (VRR)
 
-![German](screen_de.png)
+![German](screen_en.png)
 
 ## Installation
 
@@ -38,12 +38,12 @@ var config = {
 
 | Option           | Description | Options |
 |----------------- |---|---
-| `city`           | *Required* German City Name `String` (**default**: Düsseldorf) | Any City Name in North Rhine-Westphalia
-| `station`        | *Required* German Station Name `String` (**default**: Hauptbahnhof) | Any Station Name in North Rhine-Westphalia
-| `numberOfResults`| *Optional* Number of results to be displayed `Int` (**default**: 10) | *
-| `displayIcons`   | *Optional* Display fontawsome icons `boolean` (**default**: true) | false
+| `city`           | *Required* German City Name <br><br>**Type:** `String` (**default**: Düsseldorf) | Any City Name in North Rhine-Westphalia
+| `station`        | *Required* German Station Name <br><br>**Type:** `String` (**default**: Hauptbahnhof) | Any Station Name in North Rhine-Westphalia
+| `numberOfResults`| *Optional* Number of results to be displayed <br><br>**Type:** `Int` (**default**: 10) | *
+| `displayIcons`   | *Optional* Display fontawsome icons <br><br>**Type:** `boolean` (**default**: true) | false
 | `updateInterval` | *Optional* Sets the Update Interval int <br><br>**Type:** `int`(milliseconds) <br>Default 60000 milliseconds (1 minute) | * (API result is always cached for 1 Min)
-| `displayTimeOption` | *Optional* Option to change the departure time `String` (**default**: 'countdown') | 'time', 'time+countdown', 'countdown'
+| `displayTimeOption` | *Optional* Changes the type of time <br><br>**Type:** `String` (**default**: 'countdown') | 'time', 'time+countdown', 'countdown'
 
 ## Supported Languages
 

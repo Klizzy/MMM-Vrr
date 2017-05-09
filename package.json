@@ -14,5 +14,12 @@
     "grunt-yamllint": "latest",
     "stylelint-config-standard": "latest",
     "time-grunt": "latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Klizzy/MMM-Vrr.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Klizzy/MMM-Vrr/issues"
   }
 }
