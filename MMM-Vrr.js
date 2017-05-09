@@ -28,12 +28,12 @@ Module.register("MMM-Vrr", {
         moment.locale(config.language);
 
         moment.updateLocale(config.language, {
-            relativeTime : {
-                s:  this.translate("NOW"),
-                m:  "1 "+this.translate("MINUTE"),
-                mm: "%d "+this.translate("MINUTE"),
-                h:  "+1 "+this.translate("HOUR"),
-                hh: "%d "+this.translate("HOUR")
+            relativeTime: {
+                s: this.translate("NOW"),
+                m: "1 " + this.translate("MINUTE"),
+                mm: "%d " + this.translate("MINUTE"),
+                h: "+1 " + this.translate("HOUR"),
+                hh: "%d " + this.translate("HOUR")
             }
         });
 
@@ -103,12 +103,12 @@ Module.register("MMM-Vrr", {
         var self = this;
 
         // create element wrapper for show into the module
-        var wrapper = document.createElement("table");
-        wrapper.className = "small mmm-vrr-table";
+        var tableWrapper = document.createElement("table");
+        tableWrapper.className = "small mmm-vrr-table";
         // If this.dataRequest is not empty
         if (this.dataRequest) {
 
-            var result = this.dataRequest;
+            var apiResult = this.dataRequest;
 
             var tableHeadRow = document.createElement("tr");
 
@@ -116,14 +116,14 @@ Module.register("MMM-Vrr", {
                 this.translate("LINE"),
                 this.translate('DESTINATION'),
                 this.translate('DEPARTURE')
-                ];
+            ];
 
             for (var thCounter = 0; thCounter < tableHeadValues.length; thCounter++) {
                 var tableHeadSetup = document.createElement("th");
                 tableHeadSetup.innerHTML = tableHeadValues[thCounter];
 
-                if(this.config.displayIcons){
-                    if(thCounter === 0){
+                if (this.config.displayIcons) {
+                    if (thCounter === 0) {
                         tableHeadSetup.setAttribute('colspan', '2')
                     }
                 }
@@ -131,35 +131,26 @@ Module.register("MMM-Vrr", {
                 tableHeadRow.appendChild(tableHeadSetup);
             }
 
-            wrapper.appendChild(tableHeadRow);
+            tableWrapper.appendChild(tableHeadRow);
 
-            var useableResults = self.removeResultsFromThePast(result.raw);
-
-            console.log(useableResults);
+            var usableResults = self.removeResultsFromThePast(apiResult.raw);
 
             for (var trCounter = 0; trCounter < this.config.numberOfResults; trCounter++) {
 
-                var obj = useableResults[trCounter];
-
-                // var resultInPast = self.calculateRemainingMinutes(obj.sched_date, obj.sched_time, true);
-                //
-                // // Skipping this entry if we get an old cached result from the API
-                // if(resultInPast){
-                //     continue;
-                // }
+                var obj = usableResults[trCounter];
 
                 var trWrapper = document.createElement("tr");
 
-                if(this.config.displayIcons){
+                if (this.config.displayIcons) {
                     var icon = self.createMatchingIcon(obj.type);
                     trWrapper.appendChild(icon);
                 }
 
                 var remainingTime = self.calculateRemainingMinutes(obj.sched_date, obj.sched_time);
                 var timeValue;
-                switch(this.config.displayTimeOption) {
+                switch (this.config.displayTimeOption) {
                     case 'time+countdown':
-                        timeValue = obj.sched_time+" ("+remainingTime+")";
+                        timeValue = obj.sched_time + " (" + remainingTime + ")";
                         break;
                     case 'time':
                         timeValue = obj.sched_time;
@@ -182,31 +173,32 @@ Module.register("MMM-Vrr", {
                     trWrapper.appendChild(tdWrapper);
                 }
 
-                wrapper.appendChild(trWrapper);
+                tableWrapper.appendChild(trWrapper);
             }
 
-            wrapper.appendChild(trWrapper);
+            tableWrapper.appendChild(trWrapper);
         }
 
-        return wrapper;
+        return tableWrapper;
     },
 
 
     /**
      * Removes results from the past
+     * check calculateRemainingMinutes() for more details
      * @param apiResult
      * @returns {*}
      */
     removeResultsFromThePast: function (apiResult) {
         var self = this;
         var cleanedResults = [];
-        for(var i = 0; i < apiResult.length; i++){
+        for (var i = 0; i < apiResult.length; i++) {
             var singleRoute = apiResult[i];
 
             var isInPast = self.calculateRemainingMinutes(singleRoute.sched_date, singleRoute.sched_time, true);
 
-            if(!isInPast){
-               cleanedResults.push(apiResult[i]);
+            if (!isInPast) {
+                cleanedResults.push(apiResult[i]);
             }
         }
 
@@ -214,7 +206,7 @@ Module.register("MMM-Vrr", {
     },
 
     /**
-     * Removes unnecessary long name
+     * Removes unnecessary long Transport Type name (like 'InterCityExpress")
      * @param routeData
      * @returns {XML|void|string}
      */
@@ -232,10 +224,10 @@ Module.register("MMM-Vrr", {
      * @param departureTime - HH:mm
      * @param returnPastCheck
      */
-    calculateRemainingMinutes: function (departureDay, departureTime, returnPastCheck = false ) {
-        var dateAndTime = moment(departureDay +" "+ departureTime, "DD-MM-YYYY HH:mm");
+    calculateRemainingMinutes: function (departureDay, departureTime, returnPastCheck = false) {
+        var dateAndTime = moment(departureDay + " " + departureTime, "DD-MM-YYYY HH:mm");
 
-        if(returnPastCheck){
+        if (returnPastCheck) {
             var unixDifference = dateAndTime.diff(moment.now());
             return unixDifference < 0;
         }
@@ -275,16 +267,26 @@ Module.register("MMM-Vrr", {
         return type.appendChild(symbol);
     },
 
+    /**
+     *  Define required styles.
+     *  @returns {[string]}
+     */
     getScripts: function () {
         return ["moment.js"];
     },
 
-    // Define required scripts.
+    /**
+     * Define required styles.
+     * @returns {[string,string]}
+     */
     getStyles: function () {
         return ["MMM-Vrr.css", "font-awesome.css"];
     },
 
-    // Load translations files
+    /**
+     * Load translations files
+     * @returns {{en: string, de: string}}
+     */
     getTranslations: function () {
         return {
             en: "translations/en.json",

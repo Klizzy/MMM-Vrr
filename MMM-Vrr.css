@@ -11,6 +11,6 @@
 .mmm-vrr-table > tr {
     padding-bottom: 5px;
 }
-.mmm-vrr-table  td {
+.mmm-vrr-table  td, th {
     padding-left: 20px;
 }
