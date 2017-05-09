@@ -4,7 +4,7 @@ This is a module for the [MagicMirror²](https://github.com/MichMich/MagicMirror
 
 Displays the next departure times of Trains, subway and Busses from any city and station in the german federal state North Rhine-Westphalia (VRR)
 
-![German](screen_en.png)
+![English](screen-en.jpg)
 
 ## Installation
 
