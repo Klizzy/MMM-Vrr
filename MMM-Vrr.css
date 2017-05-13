@@ -7,10 +7,15 @@
  *
  *
  */
-
-.mmm-vrr-table > tr {
-    padding-bottom: 5px;
-}
-.mmm-vrr-table > tr > td, .mmm-vrr-table > tr > th {
+.mmm-vrr-table * {
     padding-left: 20px;
+    padding-top: 5px;
+}
+.mmm-vrr-table tr.border-bottom th {
+    border-bottom: 1px solid #666;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+.mmm-vrr-table *:first-child {
+    padding-left: 0;
 }

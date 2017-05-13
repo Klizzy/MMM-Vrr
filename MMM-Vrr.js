@@ -111,6 +111,7 @@ Module.register("MMM-Vrr", {
             var apiResult = this.dataRequest;
 
             var tableHeadRow = document.createElement("tr");
+            tableHeadRow.className = 'border-bottom';
 
             var tableHeadValues = [
                 this.translate("LINE"),
@@ -264,7 +265,9 @@ Module.register("MMM-Vrr", {
         var symbol = document.createElement("span");
         symbol.className = "fa fa-" + symbolType;
 
-        return type.appendChild(symbol);
+        type.appendChild(symbol);
+
+        return type;
     },
 
     /**

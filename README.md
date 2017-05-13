@@ -4,7 +4,7 @@ This is a module for the [MagicMirror²](https://github.com/MichMich/MagicMirror
 
 Displays the next departure times of Trains, subway and Busses from any city and station in the german federal state North Rhine-Westphalia (VRR)
 
-![English](screen-en.jpg)
+![English](screen-v3.png)
 
 ## Installation
 
@@ -42,9 +42,13 @@ var config = {
 | `station`        | *Required* German Station Name <br><br>**Type:** `String` (**default**: Hauptbahnhof) | Any Station Name in North Rhine-Westphalia
 | `numberOfResults`| *Optional* Number of results to be displayed <br><br>**Type:** `Int` (**default**: 10) | *
 | `displayIcons`   | *Optional* Display fontawsome icons <br><br>**Type:** `boolean` (**default**: true) | false
-| `updateInterval` | *Optional* Sets the Update Interval int <br><br>**Type:** `int`(milliseconds) <br>Default 60000 milliseconds (1 minute) | * (API result is always cached for 1 Min)
+| `updateInterval` | *Optional* Sets the Update Interval int <br><br>**Type:** `int`(milliseconds) <br> **Default** 60000 milliseconds (1 minute) | * (API result is always cached for 1 Min)
 | `displayTimeOption` | *Optional* Changes the type of time <br><br>**Type:** `String` (**default**: 'countdown') | 'time', 'time+countdown', 'countdown'
 
 ## Supported Languages
 
-Currently only `de` and `en`. Gets the Value from the Global Magic Mirror language config 
+Currently only `de` and `en` is supported. Gets the Value from the Global Magic Mirror language config 
+
+## Feedback
+
+Feel free to suggest additional features and / or improvements. 
