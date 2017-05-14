@@ -16,23 +16,17 @@ Displays the next departure times of Trains, subway and Busses from any city and
 ## Using the module
 
 To use this module, add the following configuration block to the modules array in the `config/config.js` file:
-```js
-var config = {
-    modules: [
-        {
-            module: 'MMM-Vrr',
-            position: "top_right",
-            config: {
-                city: 'Düsseldorf',
-                station: 'Hauptbahnhof',
-                numberOfResults: 10,
-                updateInterval: 60000,
-                displayIcons: true,
-                displayTimeOption: 'countdown'
-            }
-        }
-    ]
-}
+```
+{
+    module: 'MMM-Vrr',
+    position: "top_right",
+    config: {
+        city: 'Düsseldorf',
+        station: 'Hauptbahnhof',
+        numberOfResults: 10,
+        displayTimeOption: 'countdown'
+    }
+}  
 ```
 ## Configuration options
 
