@@ -15,7 +15,9 @@ Module.register("MMM-Vrr", {
         station: 'Hauptbahnhof',
         numberOfResults: 10,
         displayIcons: true,
-        displayTimeOption: 'countdown' // time, time+countdown
+        displayTimeOption: 'countdown', // time, time+countdown
+        setWidth: false,
+        scrollAfter: 15
     },
 
     requiresVersion: "2.1.0", // Required version of MagicMirror
@@ -105,6 +107,10 @@ Module.register("MMM-Vrr", {
         // create element wrapper for show into the module
         var tableWrapper = document.createElement("table");
         tableWrapper.className = "small mmm-vrr-table";
+
+        if(this.config.setWidth){
+            tableWrapper.setAttribute('style', 'width:'+this.config.setWidth+'px');
+        }
         // If this.dataRequest is not empty
         if (this.dataRequest) {
 
@@ -141,6 +147,7 @@ Module.register("MMM-Vrr", {
                 var obj = usableResults[trCounter];
 
                 var trWrapper = document.createElement("tr");
+                trWrapper.className = 'tr';
 
                 if (this.config.displayIcons) {
                     var icon = self.createMatchingIcon(obj.type);
@@ -170,7 +177,13 @@ Module.register("MMM-Vrr", {
 
                 for (var c = 0; c < tdValues.length; c++) {
                     var tdWrapper = document.createElement("td");
-                    tdWrapper.innerHTML = tdValues[c];
+
+                        if(tdValues[c].length > parseInt(this.config.scrollAfter) && this.config.setWidth){
+                            tdWrapper.innerHTML = '<marquee scrollamount="3" >'+tdValues[c]+'<marquee>';
+                        } else {
+                            tdWrapper.innerHTML = tdValues[c];
+                        }
+
                     trWrapper.appendChild(tdWrapper);
                 }
 
@@ -179,6 +192,8 @@ Module.register("MMM-Vrr", {
 
             tableWrapper.appendChild(trWrapper);
         }
+
+
 
         return tableWrapper;
     },
@@ -300,6 +315,7 @@ Module.register("MMM-Vrr", {
     processData: function (data) {
         var self = this;
         this.dataRequest = data;
+
         if (this.loaded === false) {
             self.updateDom(self.config.animationSpeed);
         }

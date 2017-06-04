@@ -38,11 +38,19 @@ To use this module, add the following configuration block to the modules array i
 | `displayIcons`   | *Optional* Display fontawsome icons <br><br>**Type:** `boolean` (**default**: true) | false
 | `updateInterval` | *Optional* Sets the Update Interval int <br><br>**Type:** `int`(milliseconds) <br> **Default** 60000 milliseconds (1 minute) | * (API result is always cached for 1 Min)
 | `displayTimeOption` | *Optional* Changes the type of time <br><br>**Type:** `String` (**default**: 'countdown') | 'time', 'time+countdown', 'countdown'
+| `setWidth`| *Optional* Sets the width of the module in pixel <br><br>**Type:** `int` (**default**: false) | Any posible size like: 400
+| `scrollAfter` | *Optional* Scrolls the destination text after the specified characters <br><br>**Type:** `int` (**default**: 15) | any possible size or `false`
 
 ## Supported Languages
 
-Currently only `de` and `en` is supported. Gets the Value from the Global Magic Mirror language config 
+Currently only `de` and `en` is supported. Gets the Value from the Global Magic Mirror language config.
+
+## Visualization of the scrollAfter option
+
+If you enable a custom width every destination text will be scrolled vertically if it has 15 or more characters. 
+![Auto scroll](scrollAfter.gif)
 
 ## Feedback
 
+Its my first Open Source Project, so it would be nice if you share your experience with this module with me [hello@zemelka.codes](hello@zemelka.codes)!
 Feel free to suggest additional features and / or improvements. 
