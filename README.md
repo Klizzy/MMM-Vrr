@@ -48,6 +48,7 @@ Currently only `de` and `en` is supported. Gets the Value from the Global Magic 
 ## Visualization of the scrollAfter option
 
 If you enable a custom width every destination text will be scrolled vertically if it has 15 or more characters. 
+
 ![Auto scroll](scrollAfter.gif)
 
 ## Feedback
