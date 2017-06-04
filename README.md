@@ -2,9 +2,10 @@
 
 This is a module for the [MagicMirror²](https://github.com/MichMich/MagicMirror/).
 
-Displays the next departure times of Trains, subway and Busses from any city and station in the german federal state North Rhine-Westphalia (VRR)
+Displays the next departure times of Trains, subway and Buses from any city and station in the german federal state North Rhine-Westphalia (VRR).
 
-![English](screen-v3.png)
+
+![English](screen-v4.5.png)
 
 ## Installation
 
@@ -47,7 +48,7 @@ Currently only `de` and `en` is supported. Gets the Value from the Global Magic 
 
 ## Visualization of the scrollAfter option
 
-If you enable a custom width every destination text will be scrolled vertically if it has 15 or more characters. 
+If you enable a custom width every destination text will be scrolled horizontally if it has 15 or more characters. 
 
 ![Auto scroll](scrollAfter.gif)
 
@@ -55,3 +56,18 @@ If you enable a custom width every destination text will be scrolled vertically 
 
 Its my first Open Source Project, so it would be nice if you share your experience with this module with me <a href="mailto:hello@zemelka.codes">hello@zemelka.codes</a>!
 Feel free to suggest additional features and / or improvements. 
+
+## Changelog
+
+#### Version 1.0
+
+* initial release
+
+#### Version 1.1
+
+* added some additional configuration to set a custom width
+* added the option to scroll the destination text horizontally
+
+#### Version 1.2
+
+* now displays delays

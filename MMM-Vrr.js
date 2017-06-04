@@ -169,6 +169,8 @@ Module.register("MMM-Vrr", {
 
                 var adjustedLine = self.stripLongeLineNames(obj);
 
+
+
                 var tdValues = [
                     adjustedLine,
                     obj.destination,
@@ -183,6 +185,15 @@ Module.register("MMM-Vrr", {
                         } else {
                             tdWrapper.innerHTML = tdValues[c];
                         }
+
+                    if(c == 2){
+                        if(obj.delay > 0){
+                            var delaySpan = document.createElement("span");
+                            delaySpan.innerHTML = ' +'+obj.delay;
+                            delaySpan.className = 'delaySpan';
+                            tdWrapper.appendChild(delaySpan);
+                        }
+                    }
 
                     trWrapper.appendChild(tdWrapper);
                 }
@@ -315,6 +326,7 @@ Module.register("MMM-Vrr", {
     processData: function (data) {
         var self = this;
         this.dataRequest = data;
+        
 
         if (this.loaded === false) {
             self.updateDom(self.config.animationSpeed);
