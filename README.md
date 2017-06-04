@@ -52,5 +52,5 @@ If you enable a custom width every destination text will be scrolled vertically 
 
 ## Feedback
 
-Its my first Open Source Project, so it would be nice if you share your experience with this module with me [hello@zemelka.codes](hello@zemelka.codes)!
+Its my first Open Source Project, so it would be nice if you share your experience with this module with me <a href="mailto:hello@zemelka.codes">hello@zemelka.codes</a>!
 Feel free to suggest additional features and / or improvements. 
