@@ -1,10 +1,9 @@
 {
-  "TITLE": "Titel",
-  "UPDATE": "Update",
   "LINE": "Linie",
   "DESTINATION": "Ziel",
   "DEPARTURE": "Abfahrt",
   "NOW": "sofort",
   "MINUTE": "Min",
-  "HOUR": "Std"
+  "HOUR": "Std",
+  "TRACK": "Gleis"
 }
