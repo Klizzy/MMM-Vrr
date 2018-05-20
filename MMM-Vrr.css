@@ -19,6 +19,10 @@
 .mmm-vrr-table *:first-child {
     padding-left: 0;
 }
-.mmm-vrr-table .delaySpan {
+.mmm-vrr-table .delay {
     color: red;
+}
+
+.MMM-Vrr img{
+    filter: grayscale(100%);
 }

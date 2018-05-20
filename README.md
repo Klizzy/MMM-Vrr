@@ -5,7 +5,8 @@ This is a module for the [MagicMirror²](https://github.com/MichMich/MagicMirror
 Displays the next departure times of Trains, subway and Buses from any city and station in the german federal state North Rhine-Westphalia (VRR).
 
 
-![English](screen-v4.5.png)
+![displayType detail](mmm-vrr-table.png) &nbsp;&nbsp; ![displayType digital](mmm-vrr.png)
+
 
 ## Installation
 
@@ -25,7 +26,8 @@ To use this module, add the following configuration block to the modules array i
         city: 'Düsseldorf',
         station: 'Hauptbahnhof',
         numberOfResults: 10,
-        displayTimeOption: 'countdown'
+        displayTimeOption: 'countdown',
+        displayType: 'detail'
     }
 }  
 ```
@@ -36,15 +38,23 @@ To use this module, add the following configuration block to the modules array i
 | `city`           | *Required* German City Name <br><br>**Type:** `String` (**default**: Düsseldorf) | Any City Name in North Rhine-Westphalia
 | `station`        | *Required* German Station Name <br><br>**Type:** `String` (**default**: Hauptbahnhof) | Any Station Name in North Rhine-Westphalia
 | `numberOfResults`| *Optional* Number of results to be displayed <br><br>**Type:** `Int` (**default**: 10) | *
-| `displayIcons`   | *Optional* Display fontawsome icons <br><br>**Type:** `boolean` (**default**: true) | false
+| `displayType`| *Optional* Changes the display type <br><br>**Type:** `String` (**default**: 'detail') | `'detail'`, `'lcd'`
+| `displayIcons`   | *Optional* Display fontawsome icons <br><br>**Type:** `boolean` (**default**: true) | `false`
 | `updateInterval` | *Optional* Sets the Update Interval int <br><br>**Type:** `int`(milliseconds) <br> **Default** 60000 milliseconds (1 minute) | * (API result is always cached for 1 Min)
-| `displayTimeOption` | *Optional* Changes the type of time <br><br>**Type:** `String` (**default**: 'countdown') | 'time', 'time+countdown', 'countdown'
-| `setWidth`| *Optional* Sets the width of the module in pixel <br><br>**Type:** `int` (**default**: false) | Any posible size like: 400
+| `displayTimeOption` | *Optional* Changes the type of time <br><br>**Type:** `String` (**default**: 'countdown') | `'time'`, `'time+countdown'`, `'countdown'`
+| `setWidth`| *Optional* Sets the width of the module in pixel <br><br>**Type:** `int` (**default**: false) | Any posible size like: `450`
+| `lcdWidth` | *Optional* Sets the width of the lcd display type <br><br>**Type:** `int` (**default**: 450) | any possible size
 | `scrollAfter` | *Optional* Scrolls the destination text after the specified characters <br><br>**Type:** `int` (**default**: 15) | any possible size or `false`
 
 ## Supported Languages
 
 Currently only `de` and `en` is supported. Gets the Value from the Global Magic Mirror language config.
+
+## "LCD" Display
+
+![lcd](mmm-vrr.png)</br>
+This option can be set if ```displayType: 'lcd'``` is added. In this type are no delays, icons or abosulte time shown.
+
 
 ## Visualization of the scrollAfter option
 
@@ -71,3 +81,9 @@ Feel free to suggest additional features and / or improvements.
 #### Version 1.2
 
 * now displays delays
+
+#### Version 1.5
+
+* delay bugfix and styling changes
+* rail track is now displayed
+* added additional display type

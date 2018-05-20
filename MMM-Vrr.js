@@ -9,18 +9,22 @@
 
 Module.register("MMM-Vrr", {
     defaults: {
-        updateInterval: 60000,
-        retryDelay: 30000,
+        displayType: 'detail',
+        updateInterval: 60000, // 1 minute
+        retryDelay: 30000, // 30 seconds
         city: 'Düsseldorf',
         station: 'Hauptbahnhof',
         numberOfResults: 10,
         displayIcons: true,
         displayTimeOption: 'countdown', // time, time+countdown
         setWidth: false,
-        scrollAfter: 15
+        scrollAfter: 15,
+        lcdWith: 450
     },
 
     requiresVersion: "2.1.0", // Required version of MagicMirror
+
+    delayStatus: 0,
 
     start: function () {
         var self = this;
@@ -48,10 +52,8 @@ Module.register("MMM-Vrr", {
         }, this.config.updateInterval);
     },
 
-    /*
-     * getData
-     * get a URL request
-     *
+    /**
+     * gets the data from vrrf.finalrewind.org
      */
     getData: function () {
         var self = this;
@@ -90,117 +92,58 @@ Module.register("MMM-Vrr", {
      *  If empty, this.config.updateInterval is used.
      */
     scheduleUpdate: function (delay) {
+        var self = this;
         var nextLoad = this.config.updateInterval;
         if (typeof delay !== "undefined" && delay >= 0) {
             nextLoad = delay;
         }
-        nextLoad = nextLoad;
-        var self = this;
         setTimeout(function () {
             self.getData();
         }, nextLoad);
     },
 
+    /**
+     * checks if one line is behind schedule
+     * @param apiResult
+     * @returns {boolean}
+     */
+    delayExist: function (apiResult) {
+        for (var i = this.config.numberOfResults; i < apiResult.raw.length; i++) {
+            if (apiResult.raw[i].delay > 0) {
+                return true;
+            }
+        }
+        return false;
+    },
+
+    /**
+     * creates the MMM-Vrr Module
+     * @returns {HTMLTableElement}
+     */
     getDom: function () {
         var self = this;
 
-        // create element wrapper for show into the module
+        if(this.config.displayType === 'lcd'){
+            tableWrapper = document.createElement('img');
+            tableWrapper.src = 'https://vrrf.finalrewind.org/Düsseldorf/Hbf.png?frontend=png&no_lines='+this.config.numberOfResults;
+            tableWrapper.style = 'width: '+ this.config.lcdWith +'px';
+            return tableWrapper;
+        }
+
         var tableWrapper = document.createElement("table");
         tableWrapper.className = "small mmm-vrr-table";
 
-        if(this.config.setWidth){
-            tableWrapper.setAttribute('style', 'width:'+this.config.setWidth+'px');
+        if (self.dataRequest) {
+
+        if (self.config.setWidth) {
+            tableWrapper.setAttribute('style', 'width:' + self.config.setWidth + 'px');
         }
-        // If this.dataRequest is not empty
-        if (this.dataRequest) {
 
-            var apiResult = this.dataRequest;
-
-            var tableHeadRow = document.createElement("tr");
-            tableHeadRow.className = 'border-bottom';
-
-            var tableHeadValues = [
-                this.translate("LINE"),
-                this.translate('DESTINATION'),
-                this.translate('DEPARTURE')
-            ];
-
-            for (var thCounter = 0; thCounter < tableHeadValues.length; thCounter++) {
-                var tableHeadSetup = document.createElement("th");
-                tableHeadSetup.innerHTML = tableHeadValues[thCounter];
-
-                if (this.config.displayIcons) {
-                    if (thCounter === 0) {
-                        tableHeadSetup.setAttribute('colspan', '2')
-                    }
-                }
-
-                tableHeadRow.appendChild(tableHeadSetup);
-            }
-
+            var apiResult = self.dataRequest;
+            var tableHeadRow = self.createTableHeader();
             tableWrapper.appendChild(tableHeadRow);
-
             var usableResults = self.removeResultsFromThePast(apiResult.raw);
-
-            for (var trCounter = 0; trCounter < this.config.numberOfResults; trCounter++) {
-
-                var obj = usableResults[trCounter];
-
-                var trWrapper = document.createElement("tr");
-                trWrapper.className = 'tr';
-
-                if (this.config.displayIcons) {
-                    var icon = self.createMatchingIcon(obj.type);
-                    trWrapper.appendChild(icon);
-                }
-
-                var remainingTime = self.calculateRemainingMinutes(obj.sched_date, obj.sched_time);
-                var timeValue;
-                switch (this.config.displayTimeOption) {
-                    case 'time+countdown':
-                        timeValue = obj.sched_time + " (" + remainingTime + ")";
-                        break;
-                    case 'time':
-                        timeValue = obj.sched_time;
-                        break;
-                    default:
-                        timeValue = remainingTime;
-                }
-
-                var adjustedLine = self.stripLongeLineNames(obj);
-
-
-
-                var tdValues = [
-                    adjustedLine,
-                    obj.destination,
-                    timeValue
-                ];
-
-                for (var c = 0; c < tdValues.length; c++) {
-                    var tdWrapper = document.createElement("td");
-
-                        if(tdValues[c].length > parseInt(this.config.scrollAfter) && this.config.setWidth){
-                            tdWrapper.innerHTML = '<marquee scrollamount="3" >'+tdValues[c]+'<marquee>';
-                        } else {
-                            tdWrapper.innerHTML = tdValues[c];
-                        }
-
-                    if(c == 2){
-                        if(obj.delay > 0){
-                            var delaySpan = document.createElement("span");
-                            delaySpan.innerHTML = ' +'+obj.delay;
-                            delaySpan.className = 'delaySpan';
-                            tdWrapper.appendChild(delaySpan);
-                        }
-                    }
-
-                    trWrapper.appendChild(tdWrapper);
-                }
-
-                tableWrapper.appendChild(trWrapper);
-            }
-
+            var trWrapper = self.createTableContent(usableResults, tableWrapper);
             tableWrapper.appendChild(trWrapper);
         }
 
@@ -209,6 +152,111 @@ Module.register("MMM-Vrr", {
         return tableWrapper;
     },
 
+
+    /**
+     * creates the table header, row and the data for it
+     * @returns {HTMLTableRowElement}
+     */
+    createTableHeader: function () {
+        var self = this;
+        var tableHeadRow = document.createElement("tr");
+        tableHeadRow.className = 'border-bottom';
+
+        var tableHeadValues = [
+            self.translate("LINE"),
+            self.translate('TRACK'),
+            self.translate('DESTINATION'),
+            self.translate('DEPARTURE')
+        ];
+
+        if(this.delayExist(self.dataRequest)){
+            var delayClockIcon = '<i class="fa fa-clock-o"></i>';
+            tableHeadValues.push(delayClockIcon);
+        }
+
+        for (var thCounter = 0; thCounter < tableHeadValues.length; thCounter++) {
+            var tableHeadSetup = document.createElement("th");
+            tableHeadSetup.innerHTML = tableHeadValues[thCounter];
+
+            if (self.config.displayIcons) {
+                if (thCounter === 0) {
+                    tableHeadSetup.setAttribute('colspan', '2')
+                }
+            }
+
+            tableHeadRow.appendChild(tableHeadSetup);
+        }
+        return tableHeadRow;
+    },
+
+    /**
+     * @param usableResults
+     * @param tableWrapper
+     * @returns {HTMLTableRowElement}
+     */
+    createTableContent: function (usableResults, tableWrapper) {
+        var self = this;
+        for (var trCounter = 0; trCounter < self.config.numberOfResults; trCounter++) {
+
+            var obj = usableResults[trCounter];
+
+            var trWrapper = document.createElement("tr");
+            trWrapper.className = 'tr';
+
+            if (self.config.displayIcons) {
+                var icon = self.createMatchingIcon(obj.type);
+                trWrapper.appendChild(icon);
+            }
+
+            var remainingTime = self.calculateRemainingMinutes(obj.sched_date, obj.sched_time);
+            var timeValue;
+            switch (self.config.displayTimeOption) {
+                case 'time+countdown':
+                    timeValue = obj.sched_time + " (" + remainingTime + ")";
+                    break;
+                case 'time':
+                    timeValue = obj.sched_time;
+                    break;
+                default:
+                    timeValue = remainingTime;
+            }
+
+            var adjustedLine = self.stripLongLineNames(obj);
+
+            var tdValues = [
+                adjustedLine,
+                obj.platform,
+                obj.destination,
+                timeValue
+            ];
+
+            if(this.delayExist(self.dataRequest)){
+                if(obj.delay > 0){
+                    var delay = ' +' + obj.delay;
+                    tdValues.push(delay);
+                }
+            }
+
+            for (var c = 0; c < tdValues.length; c++) {
+                var tdWrapper = document.createElement("td");
+
+                if (tdValues[c].length > self.config.scrollAfter && self.config.setWidth) {
+                    tdWrapper.innerHTML = '<marquee scrollamount="3" >' + tdValues[c] + '<marquee>';
+                } else {
+                    tdWrapper.innerHTML = tdValues[c];
+                }
+
+                if (c === 4) {
+                    tdWrapper.className = 'delay';
+                }
+
+                trWrapper.appendChild(tdWrapper);
+            }
+
+            tableWrapper.appendChild(trWrapper);
+        }
+        return trWrapper;
+    },
 
     /**
      * Removes results from the past
@@ -222,7 +270,7 @@ Module.register("MMM-Vrr", {
         for (var i = 0; i < apiResult.length; i++) {
             var singleRoute = apiResult[i];
 
-            var isInPast = self.calculateRemainingMinutes(singleRoute.sched_date, singleRoute.sched_time, true);
+            var isInPast = self.calculateRemainingMinutes(singleRoute.sched_date, singleRoute.time, true);
 
             if (!isInPast) {
                 cleanedResults.push(apiResult[i]);
@@ -237,7 +285,7 @@ Module.register("MMM-Vrr", {
      * @param routeData
      * @returns {XML|void|string}
      */
-    stripLongeLineNames: function (routeData) {
+    stripLongLineNames: function (routeData) {
         return routeData.line.substr(0, 7);
     },
 
@@ -268,7 +316,6 @@ Module.register("MMM-Vrr", {
      * @returns {Node}
      */
     createMatchingIcon: function (transportType) {
-
         var type = document.createElement("td");
         var symbolType;
         switch (transportType) {
@@ -324,12 +371,10 @@ Module.register("MMM-Vrr", {
     },
 
     processData: function (data) {
-        var self = this;
         this.dataRequest = data;
-        
 
         if (this.loaded === false) {
-            self.updateDom(self.config.animationSpeed);
+            this.updateDom(this.config.animationSpeed);
         }
         this.loaded = true;
 
