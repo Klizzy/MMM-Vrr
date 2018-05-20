@@ -52,8 +52,8 @@ Currently only `de` and `en` is supported. Gets the Value from the Global Magic 
 
 ## "LCD" Display
 
-![lcd](mmm-vrr.png)
-This option can be set if ```displayType: 'lcd'`` is added. In this type are no delays, icons or abosulte time shown.
+![lcd](mmm-vrr.png)</br>
+This option can be set if ```displayType: 'lcd'``` is added. In this type are no delays, icons or abosulte time shown.
 
 
 ## Visualization of the scrollAfter option
