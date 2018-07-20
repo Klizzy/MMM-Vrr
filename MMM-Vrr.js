@@ -18,7 +18,7 @@ Module.register("MMM-Vrr", {
         displayIcons: true,
         displayTimeOption: 'countdown', // time, time+countdown
         setWidth: false,
-        scrollAfter: 15,
+        scrollAfter: false,
         lcdWith: 450
     },
 
@@ -125,7 +125,7 @@ Module.register("MMM-Vrr", {
 
         if(this.config.displayType === 'lcd'){
             tableWrapper = document.createElement('img');
-            tableWrapper.src = 'https://vrrf.finalrewind.org/Düsseldorf/Hbf.png?frontend=png&no_lines='+this.config.numberOfResults;
+            tableWrapper.src = 'https://vrrf.finalrewind.org/'+ this.config.city + "/" + this.config.station +'.png?frontend=png&no_lines='+this.config.numberOfResults;
             tableWrapper.style = 'width: '+ this.config.lcdWith +'px';
             return tableWrapper;
         }
@@ -240,7 +240,7 @@ Module.register("MMM-Vrr", {
             for (var c = 0; c < tdValues.length; c++) {
                 var tdWrapper = document.createElement("td");
 
-                if (tdValues[c].length > self.config.scrollAfter && self.config.setWidth) {
+                if (tdValues[c].length > self.config.scrollAfter && self.config.scrollAfter > 0) {
                     tdWrapper.innerHTML = '<marquee scrollamount="3" >' + tdValues[c] + '<marquee>';
                 } else {
                     tdWrapper.innerHTML = tdValues[c];
