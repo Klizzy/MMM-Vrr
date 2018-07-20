@@ -380,7 +380,7 @@ Module.register("MMM-Vrr", {
 
         // the data if load
         // send notification to helper
-        this.sendSocketNotification("MMM-Vrr-NOTIFICATION_TEST", data);
+       // this.sendSocketNotification("MMM-Vrr-NOTIFICATION_TEST", data);
     },
 
     // socketNotificationReceived from helper
