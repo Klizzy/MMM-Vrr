@@ -90,4 +90,4 @@ Feel free to suggest additional features and / or improvements.
 
 #### Version 1.5.1
 
-* fix for #2 scrollAfter and displayType lcd
+* fix for Issue #3 scrollAfter and displayType lcd
