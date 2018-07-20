@@ -58,13 +58,13 @@ This option can be set if ```displayType: 'lcd'``` is added. In this type are no
 
 ## Visualization of the scrollAfter option
 
-If you enable a custom width every destination text will be scrolled horizontally if it has 15 or more characters. 
+If you set `scrollAfter:15`, the text will be scrolled horizontally if it has 15 or more characters.
 
 ![Auto scroll](scrollAfter.gif)
 
 ## Feedback
 
-Its my first Open Source Project, so it would be nice if you share your experience with this module with me <a href="mailto:hello@zemelka.codes">hello@zemelka.codes</a>!
+Its my first Open Source Project, so it would be nice if you share your experience with this module with me <a href="mailto:steven.zemelka@gmail.com">steven.zemelka@gmail.com</a>!
 Feel free to suggest additional features and / or improvements. 
 
 ## Changelog
