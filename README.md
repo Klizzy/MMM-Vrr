@@ -87,3 +87,7 @@ Feel free to suggest additional features and / or improvements.
 * delay bugfix and styling changes
 * rail track is now displayed
 * added additional display type
+
+#### Version 1.5.1
+
+* fix for #2 scrollAfter and displayType lcd
