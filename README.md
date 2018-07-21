@@ -72,6 +72,7 @@ Possible Side effects for not VRR Areas:
 * Icons don't match correctly
 * not all configured transport types hide correctly
 
+**Partly supported Areas:**
 * ASEAG
 * BSVG
 * DING
