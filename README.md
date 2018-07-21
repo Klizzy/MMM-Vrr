@@ -1,8 +1,10 @@
-# MMM-Vrr
+# MMM-Vrr and more Areas
 
 This is a module for the [MagicMirror²](https://github.com/MichMich/MagicMirror/).
 
 Displays the next departure times of Trains, subway and Buses from any city and station in the german federal state North Rhine-Westphalia (VRR).
+
+This module was intended for VRR, but it also supports the [following](#efa) Areas.
 
 
 ![displayType detail](mmm-vrr-table.png) &nbsp;&nbsp; ![displayType digital](mmm-vrr.png)
@@ -61,6 +63,42 @@ This option can be set if ```displayType: 'lcd'``` is added. In this type are no
 If you set `scrollAfter:15`, the text will be scrolled horizontally if it has 15 or more characters.
 
 ![Auto scroll](scrollAfter.gif)
+
+## <a name="efa"></a> EFA Support for other Areas
+
+**Please keep in mind, that everything besides VRR is not full supported.**
+
+Possible Side effects for not VRR Areas:
+* Icons don't match correctly
+* not all configured transport types hide correctly
+
+* ASEAG
+* BSVG
+* DING
+* IVB
+* KVV
+* LinzAG
+* NVBW
+* SVV
+* TLEM
+* VBL
+* VGN
+* VMV
+* VOR
+* VRN
+* VVO
+* VVS
+* VVV
+* BVG
+* DB
+* NAHSH
+* NASA
+* NVV
+* RSAG
+* SBB
+* VBB
+* VBN
+* ÖBB
 
 ## Feedback
 
