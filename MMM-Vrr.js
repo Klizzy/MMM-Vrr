@@ -15,6 +15,7 @@ Module.register("MMM-Vrr", {
         city: 'Düsseldorf',
         station: 'Hauptbahnhof',
         withoutDestination: [],
+        platform: '',
         numberOfResults: 10,
         displayIcons: true,
         displayTimeOption: 'countdown', // time, time+countdown
@@ -59,7 +60,7 @@ Module.register("MMM-Vrr", {
     getData: function () {
         var self = this;
 
-        var urlApi = "https://vrrf.finalrewind.org/" + this.config.city + "/" + this.config.station + ".json?frontend=json&no_lines=" + this.config.numberOfResults + "";
+        var urlApi = "https://vrrf.finalrewind.org/" + this.config.city + "/" + this.config.station + ".json?frontend=json&no_lines=" + this.config.numberOfResults + "" + "&platform=" + this.config.platform + "";
         var retry = true;
 
         var dataRequest = new XMLHttpRequest();
