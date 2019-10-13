@@ -14,6 +14,7 @@ Module.register("MMM-Vrr", {
         retryDelay: 30000, // 30 seconds
         city: 'Düsseldorf',
         station: 'Hauptbahnhof',
+        withoutDestination: [],
         numberOfResults: 10,
         displayIcons: true,
         displayTimeOption: 'countdown', // time, time+countdown
@@ -199,7 +200,18 @@ Module.register("MMM-Vrr", {
         for (var trCounter = 0; trCounter < self.config.numberOfResults; trCounter++) {
 
             var obj = usableResults[trCounter];
-
+            // check destination
+            if(self.config.withoutDestination.length > 0){
+                var found = false;
+                for (let index = 0; index < self.config.withoutDestination.length; index++) {
+                    if (obj['destination'] === self.config.withoutDestination[index]) {
+                        found = true;
+                    }
+                }
+                if (found == true) {
+                    continue;
+                }
+            }
             var trWrapper = document.createElement("tr");
             trWrapper.className = 'tr';
 
