@@ -47,6 +47,7 @@ To use this module, add the following configuration block to the modules array i
 | `setWidth`| *Optional* Sets the width of the module in pixel <br><br>**Type:** `int` (**default**: false) | Any posible size like: `450`
 | `lcdWidth` | *Optional* Sets the width of the lcd display type <br><br>**Type:** `int` (**default**: 450) | any possible size
 | `scrollAfter` | *Optional* Scrolls the destination text after the specified characters <br><br>**Type:** `int` (**default**: false) | any possible size or `false`
+| `line` | *Optional* Only show lines that start with the given string. Supports multiple strings, separated by comma (","). <br><br>**Type:** `string` (**default**: empty (i.e., show all lines)) | any possible string (e.g., "RB33,U")
 
 ## Supported Languages
 
@@ -55,7 +56,7 @@ Currently only `de` and `en` is supported. Gets the Value from the Global Magic 
 ## "LCD" Display
 
 ![lcd](mmm-vrr.png)</br>
-This option can be set if ```displayType: 'lcd'``` is added. In this type are no delays, icons or abosulte time shown.
+This option can be set if ```displayType: 'lcd'``` is added. Here, no delays, icons or absolute times are shown.
 
 
 ## Visualization of the scrollAfter option
