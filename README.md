@@ -131,3 +131,8 @@ Feel free to suggest additional features and / or improvements.
 #### Version 1.5.1
 
 * fix for Issue #3 scrollAfter and displayType lcd
+
+#### Version 1.6
+
+* shown lines can now be filtered and code improvements. THX @wapolinar !
+* added `contributing.md` 
