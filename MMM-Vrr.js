@@ -19,17 +19,43 @@ Module.register("MMM-Vrr", {
         displayTimeOption: 'countdown', // time, time+countdown
         setWidth: false,
         scrollAfter: false,
-        lcdWith: 450
+        lcdWith: 450,
+        line: ""
     },
 
     requiresVersion: "2.1.0", // Required version of MagicMirror
 
     delayStatus: 0,
 
+    vrrBasicUrl: function() {
+        return "https://vrrf.finalrewind.org/" + this.config.city + "/" + this.config.station + "";
+    },
+
+    vrrJson: function() {
+        return this.vrrBasicUrl() + ".json?frontend=json";
+    },
+	
+
+    vrrLcd: function() {
+        return this.vrrBasicUrl() + ".png?frontend=png";
+    },
+
+    getUrl: function(lcd) {
+        let url;
+        if(lcd === true) {
+            url = this.vrrLcd();
+	}
+	else {
+            url = this.vrrJson();
+        }
+        url += "&no_lines=" + this.config.numberOfResults + "&line=" + this.config.line + "";
+        return url;
+    },
+
     start: function () {
-        var self = this;
-        var dataRequest = null;
-        var dataNotification = null;
+        let self = this;
+        let dataRequest = null;
+        let dataNotification = null;
 
         moment.locale(config.language);
 
@@ -56,17 +82,15 @@ Module.register("MMM-Vrr", {
      * gets the data from vrrf.finalrewind.org
      */
     getData: function () {
-        var self = this;
+        let self = this;
 
-        var urlApi = "https://vrrf.finalrewind.org/" + this.config.city + "/" + this.config.station + ".json?frontend=json&no_lines=" + this.config.numberOfResults + "";
-        var retry = true;
+        let urlApi = this.getUrl(false); // false - no lcd
+        let retry = true;
 
-        var dataRequest = new XMLHttpRequest();
+        let dataRequest = new XMLHttpRequest();
         dataRequest.open("GET", urlApi, true);
         dataRequest.onreadystatechange = function () {
-            console.log(this.readyState);
             if (this.readyState === 4) {
-                console.log(this.status);
                 if (this.status === 200) {
                     self.processData(JSON.parse(this.response));
                 } else if (this.status === 401) {
@@ -92,8 +116,8 @@ Module.register("MMM-Vrr", {
      *  If empty, this.config.updateInterval is used.
      */
     scheduleUpdate: function (delay) {
-        var self = this;
-        var nextLoad = this.config.updateInterval;
+        let self = this;
+        let nextLoad = this.config.updateInterval;
         if (typeof delay !== "undefined" && delay >= 0) {
             nextLoad = delay;
         }
@@ -108,7 +132,7 @@ Module.register("MMM-Vrr", {
      * @returns {boolean}
      */
     delayExist: function (apiResult) {
-        for (var i = this.config.numberOfResults; i < apiResult.raw.length; i++) {
+        for (let i = this.config.numberOfResults; i < apiResult.raw.length; i++) {
             if (apiResult.raw[i].delay > 0) {
                 return true;
             }
@@ -121,34 +145,30 @@ Module.register("MMM-Vrr", {
      * @returns {HTMLTableElement}
      */
     getDom: function () {
-        var self = this;
+        let self = this;
 
         if(this.config.displayType === 'lcd'){
-            tableWrapper = document.createElement('img');
-            tableWrapper.src = 'https://vrrf.finalrewind.org/'+ this.config.city + "/" + this.config.station +'.png?frontend=png&no_lines='+this.config.numberOfResults;
+            let tableWrapper = document.createElement('img');
+            tableWrapper.src = this.getUrl(true); // true - get LCD url
             tableWrapper.style = 'width: '+ this.config.lcdWith +'px';
             return tableWrapper;
         }
 
-        var tableWrapper = document.createElement("table");
+        let tableWrapper = document.createElement("table");
         tableWrapper.className = "small mmm-vrr-table";
 
         if (self.dataRequest) {
 
-        if (self.config.setWidth) {
-            tableWrapper.setAttribute('style', 'width:' + self.config.setWidth + 'px');
-        }
+            if (self.config.setWidth) {
+                tableWrapper.setAttribute('style', 'width:' + self.config.setWidth + 'px');
+            }
 
-            var apiResult = self.dataRequest;
-            var tableHeadRow = self.createTableHeader();
+            let apiResult = self.dataRequest;
+            let tableHeadRow = self.createTableHeader();
             tableWrapper.appendChild(tableHeadRow);
-            var usableResults = self.removeResultsFromThePast(apiResult.raw);
-            var trWrapper = self.createTableContent(usableResults, tableWrapper);
-            tableWrapper.appendChild(trWrapper);
+            let usableResults = self.removeResultsFromThePast(apiResult.raw);
+            self.createTableContent(usableResults, tableWrapper);
         }
-
-
-
         return tableWrapper;
     },
 
@@ -158,11 +178,11 @@ Module.register("MMM-Vrr", {
      * @returns {HTMLTableRowElement}
      */
     createTableHeader: function () {
-        var self = this;
-        var tableHeadRow = document.createElement("tr");
+        let self = this;
+        let tableHeadRow = document.createElement("tr");
         tableHeadRow.className = 'border-bottom';
 
-        var tableHeadValues = [
+        let tableHeadValues = [
             self.translate("LINE"),
             self.translate('TRACK'),
             self.translate('DESTINATION'),
@@ -170,12 +190,12 @@ Module.register("MMM-Vrr", {
         ];
 
         if(this.delayExist(self.dataRequest)){
-            var delayClockIcon = '<i class="fa fa-clock-o"></i>';
+            let delayClockIcon = '<i class="fa fa-clock-o"></i>';
             tableHeadValues.push(delayClockIcon);
         }
 
-        for (var thCounter = 0; thCounter < tableHeadValues.length; thCounter++) {
-            var tableHeadSetup = document.createElement("th");
+        for (let thCounter = 0; thCounter < tableHeadValues.length; thCounter++) {
+            let tableHeadSetup = document.createElement("th");
             tableHeadSetup.innerHTML = tableHeadValues[thCounter];
 
             if (self.config.displayIcons) {
@@ -195,21 +215,21 @@ Module.register("MMM-Vrr", {
      * @returns {HTMLTableRowElement}
      */
     createTableContent: function (usableResults, tableWrapper) {
-        var self = this;
-        for (var trCounter = 0; trCounter < self.config.numberOfResults; trCounter++) {
+        let self = this;
+        for (let trCounter = 0; trCounter < self.config.numberOfResults; trCounter++) {
 
-            var obj = usableResults[trCounter];
+            let obj = usableResults[trCounter];
 
-            var trWrapper = document.createElement("tr");
+            let trWrapper = document.createElement("tr");
             trWrapper.className = 'tr';
 
             if (self.config.displayIcons) {
-                var icon = self.createMatchingIcon(obj.type);
+                let icon = self.createMatchingIcon(obj.type);
                 trWrapper.appendChild(icon);
             }
 
-            var remainingTime = self.calculateRemainingMinutes(obj.sched_date, obj.sched_time);
-            var timeValue;
+            let remainingTime = self.calculateRemainingMinutes(obj.sched_date, obj.sched_time);
+            let timeValue;
             switch (self.config.displayTimeOption) {
                 case 'time+countdown':
                     timeValue = obj.sched_time + " (" + remainingTime + ")";
@@ -221,9 +241,9 @@ Module.register("MMM-Vrr", {
                     timeValue = remainingTime;
             }
 
-            var adjustedLine = self.stripLongLineNames(obj);
+            let adjustedLine = self.stripLongLineNames(obj);
 
-            var tdValues = [
+            let tdValues = [
                 adjustedLine,
                 obj.platform,
                 obj.destination,
@@ -232,13 +252,13 @@ Module.register("MMM-Vrr", {
 
             if(this.delayExist(self.dataRequest)){
                 if(obj.delay > 0){
-                    var delay = ' +' + obj.delay;
+                    let delay = ' +' + obj.delay;
                     tdValues.push(delay);
                 }
             }
 
-            for (var c = 0; c < tdValues.length; c++) {
-                var tdWrapper = document.createElement("td");
+            for (let c = 0; c < tdValues.length; c++) {
+                let tdWrapper = document.createElement("td");
 
                 if (tdValues[c].length > self.config.scrollAfter && self.config.scrollAfter > 0) {
                     tdWrapper.innerHTML = '<marquee scrollamount="3" >' + tdValues[c] + '<marquee>';
@@ -252,10 +272,8 @@ Module.register("MMM-Vrr", {
 
                 trWrapper.appendChild(tdWrapper);
             }
-
             tableWrapper.appendChild(trWrapper);
         }
-        return trWrapper;
     },
 
     /**
@@ -265,12 +283,12 @@ Module.register("MMM-Vrr", {
      * @returns {*}
      */
     removeResultsFromThePast: function (apiResult) {
-        var self = this;
-        var cleanedResults = [];
-        for (var i = 0; i < apiResult.length; i++) {
-            var singleRoute = apiResult[i];
+        let self = this;
+        let cleanedResults = [];
+        for (let i = 0; i < apiResult.length; i++) {
+            let singleRoute = apiResult[i];
 
-            var isInPast = self.calculateRemainingMinutes(singleRoute.sched_date, singleRoute.time, true);
+            let isInPast = self.calculateRemainingMinutes(singleRoute.sched_date, singleRoute.time, true);
 
             if (!isInPast) {
                 cleanedResults.push(apiResult[i]);
@@ -300,10 +318,10 @@ Module.register("MMM-Vrr", {
      * @param returnPastCheck
      */
     calculateRemainingMinutes: function (departureDay, departureTime, returnPastCheck = false) {
-        var dateAndTime = moment(departureDay + " " + departureTime, "DD-MM-YYYY HH:mm");
+        let dateAndTime = moment(departureDay + " " + departureTime, "DD-MM-YYYY HH:mm");
 
         if (returnPastCheck) {
-            var unixDifference = dateAndTime.diff(moment.now());
+            let unixDifference = dateAndTime.diff(moment.now());
             return unixDifference < 0;
         }
 
@@ -316,8 +334,8 @@ Module.register("MMM-Vrr", {
      * @returns {Node}
      */
     createMatchingIcon: function (transportType) {
-        var type = document.createElement("td");
-        var symbolType;
+        let type = document.createElement("td");
+        let symbolType;
         switch (transportType) {
             case 'S-Bahn':
                 symbolType = 'train';
@@ -335,7 +353,7 @@ Module.register("MMM-Vrr", {
                 symbolType = 'bus';
                 break;
         }
-        var symbol = document.createElement("span");
+        let symbol = document.createElement("span");
         symbol.className = "fa fa-" + symbolType;
 
         type.appendChild(symbol);
