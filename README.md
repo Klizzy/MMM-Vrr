@@ -49,6 +49,7 @@ To use this module, add the following configuration block to the modules array i
 | `scrollAfter` | *Optional* Scrolls the destination text after the specified characters <br><br>**Type:** `int` (**default**: false) | any possible size or `false`
 | `withoutDestination` | *Optional* Only show results without destination. Supports a list of strings, separated by comma (","). <br><br>**Type:** `list of strings` (**default**: empty list (show all destinations)) | any possible list (e.g., ["Aachen, Hbf,Aachen","Duisburg Hbf"])
 | `platform` | *Optional* Only show platform. Supports multiple strings, separated by comma (","). <br><br>**Type:** `string` (**default**: empty (show all platforms)) | any possible string (e.g., "2,3")
+| `line` | *Optional* Only show lines that start with the given string. Supports multiple strings, separated by comma (","). <br><br>**Type:** `string` (**default**: empty (i.e., show all lines)) | any possible string (e.g., "RB33,U")
 
 ## Supported Languages
 
@@ -57,7 +58,7 @@ Currently only `de` and `en` is supported. Gets the Value from the Global Magic 
 ## "LCD" Display
 
 ![lcd](mmm-vrr.png)</br>
-This option can be set if ```displayType: 'lcd'``` is added. In this type are no delays, icons or abosulte time shown.
+This option can be set if ```displayType: 'lcd'``` is added. Here, no delays, icons or absolute times are shown.
 
 
 ## Visualization of the scrollAfter option
@@ -132,3 +133,8 @@ Feel free to suggest additional features and / or improvements.
 #### Version 1.5.1
 
 * fix for Issue #3 scrollAfter and displayType lcd
+
+#### Version 1.6
+
+* shown lines can now be filtered and code improvements. THX @wapolinar !
+* added `contributing.md` 
