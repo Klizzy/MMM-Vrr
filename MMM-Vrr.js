@@ -220,10 +220,10 @@ Module.register("MMM-Vrr", {
         let self = this;
         for (let trCounter = 0; trCounter < self.config.numberOfResults; trCounter++) {
 
-            var obj = usableResults[trCounter];
+            let obj = usableResults[trCounter];
             // check destination
             if(self.config.withoutDestination.length > 0){
-                var found = false;
+                let found = false;
                 for (let index = 0; index < self.config.withoutDestination.length; index++) {
                     if (obj['destination'] === self.config.withoutDestination[index]) {
                         found = true;
@@ -233,7 +233,7 @@ Module.register("MMM-Vrr", {
                     continue;
                 }
             }
-            var trWrapper = document.createElement("tr");
+            let trWrapper = document.createElement("tr");
             trWrapper.className = 'tr';
 
             if (self.config.displayIcons) {
