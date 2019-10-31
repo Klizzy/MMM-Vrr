@@ -134,7 +134,7 @@ Module.register("MMM-Vrr", {
      * @returns {boolean}
      */
     delayExist: function (apiResult) {
-        for (let i = this.config.numberOfResults; i < apiResult.raw.length; i++) {
+        for (let i = 0; i < this.config.numberOfResults; i++) {
             if (apiResult.raw[i].delay > 0) {
                 return true;
             }
@@ -230,6 +230,8 @@ Module.register("MMM-Vrr", {
                     }
                 }
                 if (found == true) {
+                    // increasing numberOfResults
+                    self.config.numberOfResults += 1;
                     continue;
                 }
             }
@@ -262,7 +264,7 @@ Module.register("MMM-Vrr", {
                 obj.destination,
                 timeValue
             ];
-
+            
             if(this.delayExist(self.dataRequest)){
                 if(obj.delay > 0){
                     let delay = ' +' + obj.delay;
