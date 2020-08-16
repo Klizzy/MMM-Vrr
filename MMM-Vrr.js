@@ -14,6 +14,8 @@ Module.register("MMM-Vrr", {
         retryDelay: 30000, // 30 seconds
         city: 'Düsseldorf',
         station: 'Hauptbahnhof',
+        withoutDestination: [],
+        platform: '',
         numberOfResults: 10,
         displayIcons: true,
         displayTimeOption: 'countdown', // time, time+countdown
@@ -48,7 +50,7 @@ Module.register("MMM-Vrr", {
 	else {
             url = this.vrrJson();
         }
-        url += "&no_lines=" + this.config.numberOfResults + "&line=" + this.config.line + "";
+        url += "&no_lines=" + this.config.numberOfResults + "&line=" + this.config.line + ""+ "&platform=" + this.config.platform + "";
         return url;
     },
 
@@ -132,7 +134,7 @@ Module.register("MMM-Vrr", {
      * @returns {boolean}
      */
     delayExist: function (apiResult) {
-        for (let i = this.config.numberOfResults; i < apiResult.raw.length; i++) {
+        for (let i = 0; i < this.config.numberOfResults; i++) {
             if (apiResult.raw[i].delay > 0) {
                 return true;
             }
@@ -219,7 +221,20 @@ Module.register("MMM-Vrr", {
         for (let trCounter = 0; trCounter < self.config.numberOfResults; trCounter++) {
 
             let obj = usableResults[trCounter];
-
+            // check destination
+            if(self.config.withoutDestination.length > 0){
+                let found = false;
+                for (let index = 0; index < self.config.withoutDestination.length; index++) {
+                    if (obj['destination'] === self.config.withoutDestination[index]) {
+                        found = true;
+                    }
+                }
+                if (found == true) {
+                    // increasing numberOfResults
+                    self.config.numberOfResults += 1;
+                    continue;
+                }
+            }
             let trWrapper = document.createElement("tr");
             trWrapper.className = 'tr';
 
@@ -249,7 +264,7 @@ Module.register("MMM-Vrr", {
                 obj.destination,
                 timeValue
             ];
-
+            
             if(this.delayExist(self.dataRequest)){
                 if(obj.delay > 0){
                     let delay = ' +' + obj.delay;
