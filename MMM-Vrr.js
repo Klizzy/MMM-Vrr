@@ -3,7 +3,7 @@
 /* Magic Mirror
  * Module: MMM-Vrr
  *
- * By Steven Zemelka <hello@zemelka.codes>
+ * By Steven Zemelka <steven.zemelka@gmail.com>
  * MIT Licensed.
  */
 
@@ -29,28 +29,27 @@ Module.register("MMM-Vrr", {
 
     delayStatus: 0,
 
-    vrrBasicUrl: function() {
+    vrrBasicUrl: function () {
         return "https://vrrf.finalrewind.org/" + this.config.city + "/" + this.config.station + "";
     },
 
-    vrrJson: function() {
+    vrrJson: function () {
         return this.vrrBasicUrl() + ".json?frontend=json";
     },
-	
 
-    vrrLcd: function() {
+
+    vrrLcd: function () {
         return this.vrrBasicUrl() + ".png?frontend=png";
     },
 
-    getUrl: function(lcd) {
+    getUrl: function (lcd) {
         let url;
-        if(lcd === true) {
+        if (lcd === true) {
             url = this.vrrLcd();
-	}
-	else {
+        } else {
             url = this.vrrJson();
         }
-        url += "&no_lines=" + this.config.numberOfResults + "&line=" + this.config.line + ""+ "&platform=" + this.config.platform + "";
+        url += "&no_lines=" + this.config.numberOfResults + "&line=" + this.config.line + "" + "&platform=" + this.config.platform + "";
         return url;
     },
 
@@ -149,10 +148,10 @@ Module.register("MMM-Vrr", {
     getDom: function () {
         let self = this;
 
-        if(this.config.displayType === 'lcd'){
+        if (this.config.displayType === 'lcd') {
             let tableWrapper = document.createElement('img');
             tableWrapper.src = this.getUrl(true); // true - get LCD url
-            tableWrapper.style = 'width: '+ this.config.lcdWith +'px';
+            tableWrapper.style = 'width: ' + this.config.lcdWith + 'px';
             return tableWrapper;
         }
 
@@ -191,7 +190,7 @@ Module.register("MMM-Vrr", {
             self.translate('DEPARTURE')
         ];
 
-        if(this.delayExist(self.dataRequest)){
+        if (this.delayExist(self.dataRequest)) {
             let delayClockIcon = '<i class="fa fa-clock-o"></i>';
             tableHeadValues.push(delayClockIcon);
         }
@@ -222,7 +221,7 @@ Module.register("MMM-Vrr", {
 
             let obj = usableResults[trCounter];
             // check destination
-            if(self.config.withoutDestination.length > 0){
+            if (self.config.withoutDestination.length > 0) {
                 let found = false;
                 for (let index = 0; index < self.config.withoutDestination.length; index++) {
                     if (obj['destination'] === self.config.withoutDestination[index]) {
@@ -264,9 +263,9 @@ Module.register("MMM-Vrr", {
                 obj.destination,
                 timeValue
             ];
-            
-            if(this.delayExist(self.dataRequest)){
-                if(obj.delay > 0){
+
+            if (this.delayExist(self.dataRequest)) {
+                if (obj.delay > 0) {
                     let delay = ' +' + obj.delay;
                     tdValues.push(delay);
                 }
@@ -413,7 +412,7 @@ Module.register("MMM-Vrr", {
 
         // the data if load
         // send notification to helper
-       // this.sendSocketNotification("MMM-Vrr-NOTIFICATION_TEST", data);
+        // this.sendSocketNotification("MMM-Vrr-NOTIFICATION_TEST", data);
     },
 
     // socketNotificationReceived from helper
