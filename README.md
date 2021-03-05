@@ -51,6 +51,11 @@ To use this module, add the following configuration block to the modules array i
 | `platform` | *Optional* Only show platform. Supports multiple strings, separated by comma (","). <br><br>**Type:** `string` (**default**: empty (show all platforms)) | any possible string (e.g., "2,3")
 | `line` | *Optional* Only show lines that start with the given string. Supports multiple strings, separated by comma (","). <br><br>**Type:** `string` (**default**: empty (i.e., show all lines)) | any possible string (e.g., "RB33,U")
 
+## Support
+If you like my module and want to thank, you could consider buying me a :coffee:.
+
+<a href="https://www.buymeacoffee.com/klizzy" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 45px !important;width: 180px !important;" ></a>
+
 ## Supported Languages
 
 Currently only `de` and `en` is supported. Gets the Value from the Global Magic Mirror language config.
