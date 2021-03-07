@@ -52,7 +52,7 @@ To use this module, add the following configuration block to the modules array i
 | `line` | *Optional* Only show lines that start with the given string. Supports multiple strings, separated by comma (","). <br><br>**Type:** `string` (**default**: empty (i.e., show all lines)) | any possible string (e.g., "RB33,U")
 
 ## Support
-If you like my module and want to thank, you could consider buying me a :coffee:.
+If you like my module and want to thank, you could consider buying Buy me a :coffee: & plant a 🌳 at the same time.
 
 <a href="https://www.buymeacoffee.com/klizzy" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 45px !important;width: 180px !important;" ></a>
 
