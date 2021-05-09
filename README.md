@@ -4,7 +4,7 @@ This is a module for the [MagicMirror²](https://github.com/MichMich/MagicMirror
 
 Displays the next departure times of Trains, subway and Buses from any city and station in the german federal state North Rhine-Westphalia (VRR).
 
-This module was intended for VRR, but it also supports the [following](#efa) Areas.
+This module was intended for VRR, but it also supports the [following](#efa) Areas. 
 
 
 ![displayType detail](mmm-vrr-table.png) &nbsp;&nbsp; ![displayType digital](mmm-vrr.png)
@@ -52,7 +52,10 @@ To use this module, add the following configuration block to the modules array i
 | `line` | *Optional* Only show lines that start with the given string. Supports multiple strings, separated by comma (","). <br><br>**Type:** `string` (**default**: empty (i.e., show all lines)) | any possible string (e.g., "RB33,U")
 
 ## Support
-If you like my module and want to thank, you could consider buying Buy me a :coffee: & plant a 🌳 at the same time.
+If you like my module and want to thank, you could consider:
+
+- buying Buy me a :coffee: & plant a 🌳 at the same time
+- give this Project a :star: on GitHub.
 
 <a href="https://www.buymeacoffee.com/klizzy" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 45px !important;width: 180px !important;" ></a>
 
@@ -75,6 +78,7 @@ If you set `scrollAfter:15`, the text will be scrolled horizontally if it has 15
 ## <a name="efa"></a> EFA Support for other Areas
 
 **Please keep in mind, that everything besides VRR is not full supported.**
+You can check your station and city combination beforehand [here](#check)
 
 Possible Side effects for not VRR Areas:
 * Icons don't match correctly
@@ -108,6 +112,9 @@ Possible Side effects for not VRR Areas:
 * VBB
 * VBN
 * ÖBB
+
+## <a name="check"></a> Check if your station is supported
+This application uses the provided API from [vrrf.finalrewind.org](https://vrrf.finalrewind.org). If your desired station and city combination returns a result, its highly possible that MMM-Vrr supoorts it also
 
 ## Feedback
 
