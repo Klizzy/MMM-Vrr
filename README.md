@@ -148,5 +148,10 @@ Feel free to suggest additional features and / or improvements.
 
 #### Version 1.6
 
-* shown lines can now be filtered and code improvements. THX @wapolinar !
+* shown lines can now be filtered and code improvements. THX [@wapolinar](https://github.com/wapolinar) !
 * added `contributing.md` 
+
+#### Version 1.6.1
+
+* Bugfix for station configurations which get fewer results then specified in the config. THX [@byWulf](https://github.com/byWulf) !
+* Set correct module version in `package.json`
