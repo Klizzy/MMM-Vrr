@@ -134,6 +134,10 @@ Module.register("MMM-Vrr", {
      */
     delayExist: function (apiResult) {
         for (let i = 0; i < this.config.numberOfResults; i++) {
+            if (apiResult.raw[i] === undefined) {
+                continue;
+            }
+
             if (apiResult.raw[i].delay > 0) {
                 return true;
             }
@@ -220,6 +224,10 @@ Module.register("MMM-Vrr", {
         for (let trCounter = 0; trCounter < self.config.numberOfResults; trCounter++) {
 
             let obj = usableResults[trCounter];
+            if (obj === undefined) {
+                continue;
+            }
+
             // check destination
             if (self.config.withoutDestination.length > 0) {
                 let found = false;
