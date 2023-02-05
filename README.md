@@ -155,3 +155,10 @@ Feel free to suggest additional features and / or improvements.
 
 * Bugfix for station configurations which get fewer results then specified in the config. THX [@byWulf](https://github.com/byWulf) !
 * Set correct module version in `package.json`
+
+#### Version 1.6.2
+
+* Bugfix for typo in default variable name for `lcdWidth`. THX [@MarNwk](https://github.com/MarNwk) !
+* Fixed the same typo where the config has been read 
+* `setAttribute()` will now be used to set the configured value, instead of direct interaction with the `style` property
+* Set correct module version in `package.json`
