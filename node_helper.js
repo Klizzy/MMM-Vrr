@@ -1,47 +1,32 @@
 /* Magic Mirror
  * Node Helper: MMM-Vrr
  *
- * By Steven Zemelka <hello@zemelka.codes>
+ * By Steven Zemelka <hello@klizzy.com>
  * MIT Licensed.
  */
 
-var NodeHelper = require("node_helper");
+let NodeHelper = require("node_helper");
+const request = require("request").defaults({ encoding: null });
 
 module.exports = NodeHelper.create({
+    start: function () {
+        console.log('MMM-VRR Node-helper loaded!')
+    },
 
-	// Override socketNotificationReceived method.
+    socketNotificationReceived: function (notification, imageUrl) {
+        if (notification === "MMM-VRR-SEND-IMAGE-URL") {
+           this.getImageAsBase64(imageUrl);
+        }
+    },
 
-	/* socketNotificationReceived(notification, payload)
-	 * This method is called when a socket notification arrives.
-	 *
-	 * argument notification string - The identifier of the noitication.
-	 * argument payload mixed - The payload of the notification.
-	 */
-	socketNotificationReceived: function(notification, payload) {
-		if (notification === "MMM-Vrr-NOTIFICATION_TEST") {
-			console.log("Working notification system. Notification:", notification, "payload: ", payload);
-			// Send notification
-			this.sendNotificationTest(this.anotherFunction()); //Is possible send objects :)
-		}
-	},
-
-	// Example function send notification test
-	sendNotificationTest: function(payload) {
-		this.sendSocketNotification("MMM-Vrr-NOTIFICATION_TEST", payload);
-	},
-
-	// this you can create extra routes for your module
-	extraRoutes: function() {
-		var self = this;
-		this.expressApp.get("/MMM-Vrr/extra_route", function(req, res) {
-			// call another function
-			values = self.anotherFunction();
-			res.send(values);
-		});
-	},
-
-	// Test another function
-	anotherFunction: function() {
-		return {date: new Date()};
-	}
+    getImageAsBase64: function (imageUrl) {
+        let self = this;
+        request.get(imageUrl, function (error, response, body) {
+            let data;
+            if (!error && response.statusCode === 200) {
+                data = "data:" + response.headers["content-type"] + ";base64," + Buffer.from(body).toString('base64');
+                self.sendSocketNotification('base64ImageReceived', data);
+            }
+        });
+    }
 });

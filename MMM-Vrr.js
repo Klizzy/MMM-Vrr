@@ -3,7 +3,7 @@
 /* Magic Mirror
  * Module: MMM-Vrr
  *
- * By Steven Zemelka <steven.zemelka@gmail.com>
+ * By Steven Zemelka <hello@klizzy.com>
  * MIT Licensed.
  */
 
@@ -26,37 +26,36 @@ Module.register("MMM-Vrr", {
     },
 
     requiresVersion: "2.1.0", // Required version of MagicMirror
-
     delayStatus: 0,
+    base64String: '',
 
     vrrBasicUrl: function () {
-        return "https://vrrf.finalrewind.org/" + this.config.city + "/" + this.config.station + "";
+        return `https://vrrf.finalrewind.org/${this.config.city}/${this.config.station}`;
     },
 
-    vrrJson: function () {
-        return this.vrrBasicUrl() + ".json?frontend=json";
+    vrrJsonUrl: function () {
+        return `${this.vrrBasicUrl()}.json?frontend=json`;
     },
 
 
-    vrrLcd: function () {
-        return this.vrrBasicUrl() + ".png?frontend=png";
+    vrrLcdUrl: function () {
+        return `${this.vrrBasicUrl()}.png?frontend=png`;
     },
 
-    getUrl: function (lcd) {
-        let url;
-        if (lcd === true) {
-            url = this.vrrLcd();
+    getUrl: function () {
+        let url = '';
+        if (this.isDisplayTypeLcd()) {
+            url = this.vrrLcdUrl();
         } else {
-            url = this.vrrJson();
+            url = this.vrrJsonUrl();
+            url += `&no_lines=${this.config.numberOfResults}&line=${this.config.line}&platform=${this.config.platform}`;
         }
-        url += "&no_lines=" + this.config.numberOfResults + "&line=" + this.config.line + "" + "&platform=" + this.config.platform + "";
+
         return url;
     },
 
     start: function () {
         let self = this;
-        let dataRequest = null;
-        let dataNotification = null;
 
         moment.locale(config.language);
 
@@ -72,11 +71,22 @@ Module.register("MMM-Vrr", {
 
         //Flag for check if module is loaded
         this.loaded = false;
+
         // Schedule update timer.
-        this.getData();
-        setInterval(function () {
-            self.updateDom();
-        }, this.config.updateInterval);
+        if (this.isDisplayTypeLcd()) {
+            setInterval(function () {
+                self.sendLcdImageUrlToSocket();
+            }, this.config.updateInterval);
+        } else {
+            this.getData();
+            setInterval(function () {
+                self.updateDom();
+            }, this.config.updateInterval);
+        }
+    },
+
+    sendLcdImageUrlToSocket: function () {
+        this.sendSocketNotification("MMM-VRR-SEND-IMAGE-URL", this.getUrl());
     },
 
     /**
@@ -85,7 +95,7 @@ Module.register("MMM-Vrr", {
     getData: function () {
         let self = this;
 
-        let urlApi = this.getUrl(false); // false - no lcd
+        let urlApi = this.getUrl();
         let retry = true;
 
         let dataRequest = new XMLHttpRequest();
@@ -145,6 +155,10 @@ Module.register("MMM-Vrr", {
         return false;
     },
 
+    isDisplayTypeLcd: function () {
+        return this.config.displayType === 'lcd';
+    },
+
     /**
      * creates the MMM-Vrr Module
      * @returns {HTMLTableElement|HTMLImageElement}
@@ -152,10 +166,17 @@ Module.register("MMM-Vrr", {
     getDom: function () {
         let self = this;
 
-        if (this.config.displayType === 'lcd') {
+        if (this.isDisplayTypeLcd()) {
+            let lcdWidth = 'width:' + this.config.lcdWidth + 'px';
             let tableWrapper = document.createElement('img');
-            tableWrapper.src = this.getUrl(true); // true - get LCD url
-            tableWrapper.setAttribute('style', 'width:' + this.config.lcdWidth + 'px');
+
+            if (this.base64String === '') {
+                tableWrapper.setAttribute('src', this.getUrl());
+            } else {
+                tableWrapper.setAttribute('src', this.base64String);
+            }
+
+            tableWrapper.setAttribute('style', lcdWidth);
             return tableWrapper;
         }
 
@@ -165,7 +186,8 @@ Module.register("MMM-Vrr", {
         if (self.dataRequest) {
 
             if (self.config.setWidth) {
-                tableWrapper.setAttribute('style', 'width:' + self.config.setWidth + 'px');
+                let tableWidth = 'width:' + self.config.setWidth + 'px';
+                tableWrapper.setAttribute('style', tableWidth);
             }
 
             let apiResult = self.dataRequest;
@@ -417,17 +439,12 @@ Module.register("MMM-Vrr", {
             this.updateDom(this.config.animationSpeed);
         }
         this.loaded = true;
-
-        // the data if load
-        // send notification to helper
-        // this.sendSocketNotification("MMM-Vrr-NOTIFICATION_TEST", data);
     },
 
     // socketNotificationReceived from helper
-    socketNotificationReceived: function (notification, payload) {
-        if (notification === "MMM-Vrr-NOTIFICATION_TEST") {
-            // set dataNotification
-            this.dataNotification = payload;
+    socketNotificationReceived: function (notification, base64ImageString) {
+        if (notification === "base64ImageReceived") {
+            this.base64String = base64ImageString;
             this.updateDom();
         }
     },
