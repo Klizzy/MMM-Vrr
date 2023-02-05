@@ -21,7 +21,7 @@ Module.register("MMM-Vrr", {
         displayTimeOption: 'countdown', // time, time+countdown
         setWidth: false,
         scrollAfter: false,
-        lcdWith: 450,
+        lcdWidth: 450,
         line: ""
     },
 
