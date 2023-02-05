@@ -147,7 +147,7 @@ Module.register("MMM-Vrr", {
 
     /**
      * creates the MMM-Vrr Module
-     * @returns {HTMLTableElement}
+     * @returns {HTMLTableElement|HTMLImageElement}
      */
     getDom: function () {
         let self = this;
@@ -155,7 +155,7 @@ Module.register("MMM-Vrr", {
         if (this.config.displayType === 'lcd') {
             let tableWrapper = document.createElement('img');
             tableWrapper.src = this.getUrl(true); // true - get LCD url
-            tableWrapper.style = 'width: ' + this.config.lcdWith + 'px';
+            tableWrapper.setAttribute('style', 'width:' + this.config.lcdWidth + 'px');
             return tableWrapper;
         }
 
