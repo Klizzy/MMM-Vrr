@@ -162,3 +162,10 @@ Feel free to suggest additional features and / or improvements.
 * Fixed the same typo where the config has been read 
 * `setAttribute()` will now be used to set the configured value, instead of direct interaction with the `style` property
 * Set correct module version in `package.json`
+
+#### Version 1.6.3
+
+* Bugfix for LCD displayType option not updating - see [issue 14](https://github.com/Klizzy/MMM-Vrr/issues/14) for more details
+* Refactoring code to make it more readable
+* `setAttribute()` will now be used to set the configured value, instead of direct interaction with the properties 
+* Set correct module version in `package.json`
