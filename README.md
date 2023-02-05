@@ -144,7 +144,7 @@ Feel free to suggest additional features and / or improvements.
 
 #### Version 1.5.1
 
-* fix for Issue #3 scrollAfter and displayType lcd
+* fix for [Issue #3](https://github.com/Klizzy/MMM-Vrr/issues/3) scrollAfter and displayType lcd
 
 #### Version 1.6
 
