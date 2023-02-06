@@ -118,7 +118,7 @@ This application uses the provided API from [vrrf.finalrewind.org](https://vrrf.
 
 ## Feedback
 
-Its my first Open Source Project, so it would be nice if you share your experience with this module with me <a href="mailto:steven.zemelka@gmail.com">steven.zemelka@gmail.com</a>!
+It's my first Open Source Project, so it would be nice if you share your experience with this module with me <a href="mailto:steven.zemelka@gmail.com">steven.zemelka@gmail.com</a>!
 Feel free to suggest additional features and / or improvements. 
 
 ## Changelog

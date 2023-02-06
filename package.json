@@ -1,6 +1,6 @@
 {
     "name": "Magic-Mirror-Module-Vrr",
-    "version": "1.6.3",
+    "version": "1.6.4",
     "description": "Displays the next departure times of Trains, subway and Busses from any city and station in the german federal state North Rhine-Westphalia",
     "main": "MMM-Vrr.js",
     "author": "Steven Zemelka <hello@zemelka.codes>",
