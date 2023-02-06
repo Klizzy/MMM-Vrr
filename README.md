@@ -118,7 +118,7 @@ This application uses the provided API from [vrrf.finalrewind.org](https://vrrf.
 
 ## Feedback
 
-Its my first Open Source Project, so it would be nice if you share your experience with this module with me <a href="mailto:steven.zemelka@gmail.com">steven.zemelka@gmail.com</a>!
+It's my first Open Source Project, so it would be nice if you share your experience with this module with me <a href="mailto:steven.zemelka@gmail.com">steven.zemelka@gmail.com</a>!
 Feel free to suggest additional features and / or improvements. 
 
 ## Changelog
@@ -169,3 +169,9 @@ Feel free to suggest additional features and / or improvements.
 * Refactoring code to make it more readable
 * `setAttribute()` will now be used to set the configured value, instead of direct interaction with the properties 
 * Set correct module version in `package.json`
+
+#### Version 1.6.4
+
+* Added npm request dependency into module see [issue 14](https://github.com/Klizzy/MMM-Vrr/issues/14)
+* Added keywords into package.json
+* Added `package-lock.json`
