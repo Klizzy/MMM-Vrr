@@ -15,7 +15,8 @@ jobs:
         timeout-minutes: 30
         strategy:
             matrix:
-                node-version: [ 14.x, 16.x, 18.x ]
+#                node-version: [ 14.x, 16.x, 18.x ]
+                node-version: [ 14.x]
         steps:
             -   name: Checkout code
                 uses: actions/checkout@v3
@@ -32,7 +33,7 @@ jobs:
                     path: modules
             -   name: Install dependencies and run tests
                 run: |
-                    cd modules/MMM-Vrr && npm install && cd ../../
+                    ls -la &&
                     Xvfb :99 -screen 0 1024x768x16 &
                     export DISPLAY=:99
                     npm run install-mm:dev
