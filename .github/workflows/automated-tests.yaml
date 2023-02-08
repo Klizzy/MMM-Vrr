@@ -38,17 +38,13 @@ jobs:
                     ls -la &&
                     cd ../../ &&
                     ls -la
-#            -   name: Install dependencies and run tests
-#                run: |
-#                    cd modules/MMM-Vrr && npm install &&
-#                    cd ls -la &&
-#                    cd ../../ &&
-#                    ls -la ../../
-#                    Xvfb :99 -screen 0 1024x768x16 &
-#                    export DISPLAY=:99
-#                    npm run install-mm:dev
-#                    touch css/custom.css
-#                    npm run test:prettier
-#                    npm run test:js
-#                    npm run test:css
-#                    npm run test
+            -   name: Install dependencies and run tests
+                run: |
+                    Xvfb :99 -screen 0 1024x768x16 &
+                    export DISPLAY=:99
+                    npm run install-mm:dev
+                    touch css/custom.css
+                    npm run test:prettier
+                    npm run test:js
+                    npm run test:css
+                    npm run test
