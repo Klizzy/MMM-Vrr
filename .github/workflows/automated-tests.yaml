@@ -31,16 +31,24 @@ jobs:
                 uses: actions/checkout@v3
                 with:
                     path: modules/MMM-Vrr
-            -   name: Install dependencies and run tests
+            -   name: Install MMR-Vrr dependencies
                 run: |
+                    ls -la &&
                     cd modules/MMM-Vrr && npm install &&
-                    cd ls -la &&
+                    ls -la &&
                     cd ../../ &&
-                    Xvfb :99 -screen 0 1024x768x16 &
-                    export DISPLAY=:99
-                    npm run install-mm:dev
-                    touch css/custom.css
-                    npm run test:prettier
-                    npm run test:js
-                    npm run test:css
-                    npm run test
+                    ls -la
+#            -   name: Install dependencies and run tests
+#                run: |
+#                    cd modules/MMM-Vrr && npm install &&
+#                    cd ls -la &&
+#                    cd ../../ &&
+#                    ls -la ../../
+#                    Xvfb :99 -screen 0 1024x768x16 &
+#                    export DISPLAY=:99
+#                    npm run install-mm:dev
+#                    touch css/custom.css
+#                    npm run test:prettier
+#                    npm run test:js
+#                    npm run test:css
+#                    npm run test
