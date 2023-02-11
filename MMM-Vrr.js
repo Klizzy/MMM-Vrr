@@ -7,7 +7,6 @@
  * MIT Licensed.
  */
 
-
 Module.register("MMM-Vrr", {
   defaults: {
     displayType: "detail",
