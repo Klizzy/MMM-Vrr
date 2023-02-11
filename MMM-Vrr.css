@@ -8,21 +8,21 @@
  *
  */
 .mmm-vrr-table * {
-    padding-left: 20px;
-    padding-top: 5px;
+  padding-left: 20px;
+  padding-top: 5px;
 }
 .mmm-vrr-table tr.border-bottom th {
-    border-bottom: 1px solid #666;
-    padding-bottom: 5px;
-    margin-bottom: 10px;
+  border-bottom: 1px solid #666;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
 }
 .mmm-vrr-table *:first-child {
-    padding-left: 0;
+  padding-left: 0;
 }
 .mmm-vrr-table .delay {
-    color: red;
+  color: red;
 }
 
-.MMM-Vrr img{
-    filter: grayscale(100%);
+.MMM-Vrr img {
+  filter: grayscale(100%);
 }

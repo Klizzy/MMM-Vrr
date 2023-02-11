@@ -1,35 +1,35 @@
 {
-    "name": "Magic-Mirror-Module-Vrr",
-    "version": "1.6.4",
-    "description": "Displays the next departure times of Trains, subway and Busses from any city and station in the german federal state North Rhine-Westphalia",
-    "main": "MMM-Vrr.js",
-    "author": "Steven Zemelka <hello@zemelka.codes>",
-    "license": "MIT",
-    "devDependencies": {
-        "grunt": "latest",
-        "grunt-eslint": "latest",
-        "grunt-jsonlint": "latest",
-        "grunt-markdownlint": "^3.1.6",
-        "grunt-stylelint": "latest",
-        "grunt-yamllint": "latest",
-        "stylelint-config-standard": "latest",
-        "time-grunt": "latest"
-    },
-    "keywords": [
-        "magic mirror",
-        "smart mirror",
-        "vrr",
-        "transportation",
-        "module"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/Klizzy/MMM-Vrr.git"
-    },
-    "bugs": {
-        "url": "https://github.com/Klizzy/MMM-Vrr/issues"
-    },
-    "dependencies": {
-        "request": "^2.88.2"
-    }
+  "name": "Magic-Mirror-Module-Vrr",
+  "version": "1.6.4",
+  "description": "Displays the next departure times of Trains, subway and Busses from any city and station in the german federal state North Rhine-Westphalia",
+  "main": "MMM-Vrr.js",
+  "author": "Steven Zemelka <hello@zemelka.codes>",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "latest",
+    "grunt-eslint": "latest",
+    "grunt-jsonlint": "latest",
+    "grunt-markdownlint": "^3.1.6",
+    "grunt-stylelint": "latest",
+    "grunt-yamllint": "latest",
+    "stylelint-config-standard": "latest",
+    "time-grunt": "latest"
+  },
+  "keywords": [
+    "magic mirror",
+    "smart mirror",
+    "vrr",
+    "transportation",
+    "module"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Klizzy/MMM-Vrr.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Klizzy/MMM-Vrr/issues"
+  },
+  "dependencies": {
+    "request": "^2.88.2"
+  }
 }

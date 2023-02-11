@@ -4,11 +4,9 @@ This is a module for the [MagicMirror²](https://github.com/MichMich/MagicMirror
 
 Displays the next departure times of Trains, subway and Buses from any city and station in the german federal state North Rhine-Westphalia (VRR).
 
-This module was intended for VRR, but it also supports the [following](#efa) Areas. 
-
+This module was intended for VRR, but it also supports the [following](#efa) Areas.
 
 ![displayType detail](mmm-vrr-table.png) &nbsp;&nbsp; ![displayType digital](mmm-vrr.png)
-
 
 ## Installation
 
@@ -20,6 +18,7 @@ This module was intended for VRR, but it also supports the [following](#efa) Are
 ## Using the module
 
 To use this module, add the following configuration block to the modules array in the `config/config.js` file:
+
 ```
 {
     module: 'MMM-Vrr',
@@ -31,27 +30,29 @@ To use this module, add the following configuration block to the modules array i
         displayTimeOption: 'countdown',
         displayType: 'detail'
     }
-}  
+}
 ```
+
 ## Configuration options
 
-| Option           | Description | Options |
-|----------------- |---|---
-| `city`           | *Required* German City Name <br><br>**Type:** `String` (**default**: Düsseldorf) | Any City Name in North Rhine-Westphalia
-| `station`        | *Required* German Station Name <br><br>**Type:** `String` (**default**: Hauptbahnhof) | Any Station Name in North Rhine-Westphalia
-| `numberOfResults`| *Optional* Number of results to be displayed <br><br>**Type:** `Int` (**default**: 10) | *
-| `displayType`| *Optional* Changes the display type <br><br>**Type:** `String` (**default**: 'detail') | `'detail'`, `'lcd'`
-| `displayIcons`   | *Optional* Display fontawsome icons <br><br>**Type:** `boolean` (**default**: true) | `false`
-| `updateInterval` | *Optional* Sets the Update Interval int <br><br>**Type:** `int`(milliseconds) <br> **Default** 60000 milliseconds (1 minute) | * (API result is always cached for 1 Min)
-| `displayTimeOption` | *Optional* Changes the type of time <br><br>**Type:** `String` (**default**: 'countdown') | `'time'`, `'time+countdown'`, `'countdown'`
-| `setWidth`| *Optional* Sets the width of the module in pixel <br><br>**Type:** `int` (**default**: false) | Any posible size like: `450`
-| `lcdWidth` | *Optional* Sets the width of the lcd display type <br><br>**Type:** `int` (**default**: 450) | any possible size
-| `scrollAfter` | *Optional* Scrolls the destination text after the specified characters <br><br>**Type:** `int` (**default**: false) | any possible size or `false`
-| `withoutDestination` | *Optional* Only show results without destination. Supports a list of strings, separated by comma (","). <br><br>**Type:** `list of strings` (**default**: empty list (show all destinations)) | any possible list (e.g., ["Aachen, Hbf,Aachen","Duisburg Hbf"])
-| `platform` | *Optional* Only show platform. Supports multiple strings, separated by comma (","). <br><br>**Type:** `string` (**default**: empty (show all platforms)) | any possible string (e.g., "2,3")
-| `line` | *Optional* Only show lines that start with the given string. Supports multiple strings, separated by comma (","). <br><br>**Type:** `string` (**default**: empty (i.e., show all lines)) | any possible string (e.g., "RB33,U")
+| Option               | Description                                                                                                                                                                                   | Options                                                         |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| `city`               | _Required_ German City Name <br><br>**Type:** `String` (**default**: Düsseldorf)                                                                                                              | Any City Name in North Rhine-Westphalia                         |
+| `station`            | _Required_ German Station Name <br><br>**Type:** `String` (**default**: Hauptbahnhof)                                                                                                         | Any Station Name in North Rhine-Westphalia                      |
+| `numberOfResults`    | _Optional_ Number of results to be displayed <br><br>**Type:** `Int` (**default**: 10)                                                                                                        | \*                                                              |
+| `displayType`        | _Optional_ Changes the display type <br><br>**Type:** `String` (**default**: 'detail')                                                                                                        | `'detail'`, `'lcd'`                                             |
+| `displayIcons`       | _Optional_ Display fontawsome icons <br><br>**Type:** `boolean` (**default**: true)                                                                                                           | `false`                                                         |
+| `updateInterval`     | _Optional_ Sets the Update Interval int <br><br>**Type:** `int`(milliseconds) <br> **Default** 60000 milliseconds (1 minute)                                                                  | \* (API result is always cached for 1 Min)                      |
+| `displayTimeOption`  | _Optional_ Changes the type of time <br><br>**Type:** `String` (**default**: 'countdown')                                                                                                     | `'time'`, `'time+countdown'`, `'countdown'`                     |
+| `setWidth`           | _Optional_ Sets the width of the module in pixel <br><br>**Type:** `int` (**default**: false)                                                                                                 | Any posible size like: `450`                                    |
+| `lcdWidth`           | _Optional_ Sets the width of the lcd display type <br><br>**Type:** `int` (**default**: 450)                                                                                                  | any possible size                                               |
+| `scrollAfter`        | _Optional_ Scrolls the destination text after the specified characters <br><br>**Type:** `int` (**default**: false)                                                                           | any possible size or `false`                                    |
+| `withoutDestination` | _Optional_ Only show results without destination. Supports a list of strings, separated by comma (","). <br><br>**Type:** `list of strings` (**default**: empty list (show all destinations)) | any possible list (e.g., ["Aachen, Hbf,Aachen","Duisburg Hbf"]) |
+| `platform`           | _Optional_ Only show platform. Supports multiple strings, separated by comma (","). <br><br>**Type:** `string` (**default**: empty (show all platforms))                                      | any possible string (e.g., "2,3")                               |
+| `line`               | _Optional_ Only show lines that start with the given string. Supports multiple strings, separated by comma (","). <br><br>**Type:** `string` (**default**: empty (i.e., show all lines))      | any possible string (e.g., "RB33,U")                            |
 
 ## Support
+
 If you like my module and want to thank, you could consider:
 
 - buying Buy me a :coffee: & plant a 🌳 at the same time
@@ -66,8 +67,7 @@ Currently only `de` and `en` is supported. Gets the Value from the Global Magic 
 ## "LCD" Display
 
 ![lcd](mmm-vrr.png)</br>
-This option can be set if ```displayType: 'lcd'``` is added. Here, no delays, icons or absolute times are shown.
-
+This option can be set if `displayType: 'lcd'` is added. Here, no delays, icons or absolute times are shown.
 
 ## Visualization of the scrollAfter option
 
@@ -81,97 +81,100 @@ If you set `scrollAfter:15`, the text will be scrolled horizontally if it has 15
 You can check your station and city combination beforehand [here](#check)
 
 Possible Side effects for not VRR Areas:
-* Icons don't match correctly
-* not all configured transport types hide correctly
+
+- Icons don't match correctly
+- not all configured transport types hide correctly
 
 **Partly supported Areas:**
-* ASEAG
-* BSVG
-* DING
-* IVB
-* KVV
-* LinzAG
-* NVBW
-* SVV
-* TLEM
-* VBL
-* VGN
-* VMV
-* VOR
-* VRN
-* VVO
-* VVS
-* VVV
-* BVG
-* DB
-* NAHSH
-* NASA
-* NVV
-* RSAG
-* SBB
-* VBB
-* VBN
-* ÖBB
+
+- ASEAG
+- BSVG
+- DING
+- IVB
+- KVV
+- LinzAG
+- NVBW
+- SVV
+- TLEM
+- VBL
+- VGN
+- VMV
+- VOR
+- VRN
+- VVO
+- VVS
+- VVV
+- BVG
+- DB
+- NAHSH
+- NASA
+- NVV
+- RSAG
+- SBB
+- VBB
+- VBN
+- ÖBB
 
 ## <a name="check"></a> Check if your station is supported
+
 This application uses the provided API from [vrrf.finalrewind.org](https://vrrf.finalrewind.org). If your desired station and city combination returns a result, its highly possible that MMM-Vrr supoorts it also
 
 ## Feedback
 
 It's my first Open Source Project, so it would be nice if you share your experience with this module with me <a href="mailto:steven.zemelka@gmail.com">steven.zemelka@gmail.com</a>!
-Feel free to suggest additional features and / or improvements. 
+Feel free to suggest additional features and / or improvements.
 
 ## Changelog
 
 #### Version 1.0
 
-* initial release
+- initial release
 
 #### Version 1.1
 
-* added some additional configuration to set a custom width
-* added the option to scroll the destination text horizontally
+- added some additional configuration to set a custom width
+- added the option to scroll the destination text horizontally
 
 #### Version 1.2
 
-* now displays delays
+- now displays delays
 
 #### Version 1.5
 
-* delay bugfix and styling changes
-* rail track is now displayed
-* added additional display type
+- delay bugfix and styling changes
+- rail track is now displayed
+- added additional display type
 
 #### Version 1.5.1
 
-* fix for [Issue #3](https://github.com/Klizzy/MMM-Vrr/issues/3) scrollAfter and displayType lcd
+- fix for [Issue #3](https://github.com/Klizzy/MMM-Vrr/issues/3) scrollAfter and displayType lcd
 
 #### Version 1.6
 
-* shown lines can now be filtered and code improvements. THX [@wapolinar](https://github.com/wapolinar) !
-* added `contributing.md` 
+- shown lines can now be filtered and code improvements. THX [@wapolinar](https://github.com/wapolinar) !
+- added `contributing.md`
 
 #### Version 1.6.1
 
-* Bugfix for station configurations which get fewer results then specified in the config. THX [@byWulf](https://github.com/byWulf) !
-* Set correct module version in `package.json`
+- Bugfix for station configurations which get fewer results then specified in the config. THX [@byWulf](https://github.com/byWulf) !
+- Set correct module version in `package.json`
 
 #### Version 1.6.2
 
-* Bugfix for typo in default variable name for `lcdWidth`. THX [@MarNwk](https://github.com/MarNwk) !
-* Fixed the same typo where the config has been read 
-* `setAttribute()` will now be used to set the configured value, instead of direct interaction with the `style` property
-* Set correct module version in `package.json`
+- Bugfix for typo in default variable name for `lcdWidth`. THX [@MarNwk](https://github.com/MarNwk) !
+- Fixed the same typo where the config has been read
+- `setAttribute()` will now be used to set the configured value, instead of direct interaction with the `style` property
+- Set correct module version in `package.json`
 
 #### Version 1.6.3
 
-* Bugfix for LCD displayType option not updating - see [issue 14](https://github.com/Klizzy/MMM-Vrr/issues/14) for more details
-* Refactoring code to make it more readable
-* `setAttribute()` will now be used to set the configured value, instead of direct interaction with the properties 
-* Set correct module version in `package.json`
+- Bugfix for LCD displayType option not updating - see [issue 14](https://github.com/Klizzy/MMM-Vrr/issues/14) for more details
+- Refactoring code to make it more readable
+- `setAttribute()` will now be used to set the configured value, instead of direct interaction with the properties
+- Set correct module version in `package.json`
 
 #### Version 1.6.4
 
-* Added npm request dependency into module see [issue 14](https://github.com/Klizzy/MMM-Vrr/issues/14)
-* Added keywords into package.json
-* Added `package-lock.json`
+- Added npm request dependency into module see [issue 14](https://github.com/Klizzy/MMM-Vrr/issues/14)
+- Added keywords into package.json
+- Added `package-lock.json`

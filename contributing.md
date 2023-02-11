@@ -4,4 +4,4 @@
 
 ### Pull Requests
 
-If you submit a new feature add the proper documentation, so others will know how to use it :simple_smile: 
+If you submit a new feature add the proper documentation, so others will know how to use it :simple_smile:
