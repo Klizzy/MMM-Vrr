@@ -32,11 +32,7 @@ jobs:
           path: modules/MMM-Vrr
       - name: Install MMR-Vrr dependencies
         run: |
-          ls -la &&
-          cd modules/MMM-Vrr && npm install &&
-          ls -la &&
-          cd ../../ &&
-          ls -la
+          cd modules/MMM-Vrr && npm install
       - name: Install dependencies and run tests
         run: |
           Xvfb :99 -screen 0 1024x768x16 &
