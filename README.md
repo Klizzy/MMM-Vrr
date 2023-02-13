@@ -133,4 +133,4 @@ Feel free to suggest additional features and / or improvements.
 
 ## Changelog
 
-See [changelogs.md](https://github.com/Klizzy/MMM-Vrr/changelogs.md) to view changes and contributors.
+See [changelogs.md](https://github.com/Klizzy/MMM-Vrr/blob/master/changelogs.md) to view changes and contributors.
