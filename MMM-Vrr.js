@@ -47,8 +47,8 @@ Module.register("MMM-Vrr", {
       url = this.vrrLcdUrl();
     } else {
       url = this.vrrJsonUrl();
-      url += `&no_lines=${this.config.numberOfResults}&line=${this.config.line}&platform=${this.config.platform}`;
     }
+	  url += `&no_lines=${this.config.numberOfResults}&line=${this.config.line}&platform=${this.config.platform}`;
 
     return url;
   },
