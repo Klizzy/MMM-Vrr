@@ -85,7 +85,7 @@ If you set `scrollAfter:15`, the text will be scrolled horizontally if it has 15
 ## <a name="efa"></a> EFA Support for other Areas
 
 **Please keep in mind, that everything besides VRR is not full supported.**
-You can check your station and city combination beforehand [here](#check)
+You can check your station and city combination beforehand [here](https://github.com/Klizzy/MMM-Vrr#-check-if-your-station-is-supported)
 
 Possible Side effects for not VRR Areas:
 
