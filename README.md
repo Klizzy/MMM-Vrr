@@ -38,18 +38,18 @@ To use this module, add the following configuration block to the modules array i
 <div style="text-align: center;">
 
 | Option               | Description                                                                                                                                                                                   | Options                                                         | LCD type support |
-| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |------------------|
-| `city`               | _Required_ German City Name <br><br>**Type:** `String` (**default**: Düsseldorf)                                                                                                              | Any City Name in North Rhine-Westphalia                         | ✅                |
-| `station`            | _Required_ German Station Name <br><br>**Type:** `String` (**default**: Hauptbahnhof)                                                                                                         | Any Station Name in North Rhine-Westphalia                      | ✅                |
-| `numberOfResults`    | _Optional_ Number of results to be displayed <br><br>**Type:** `Int` (**default**: 10)                                                                                                        | \*                                                              | ✅                |
-| `displayType`        | _Optional_ Changes the display type <br><br>**Type:** `String` (**default**: 'detail')                                                                                                        | `'detail'`, `'lcd'`                                             | ✅                |
-| `displayIcons`       | _Optional_ Display fontawsome icons <br><br>**Type:** `boolean` (**default**: true)                                                                                                           | `false`                                                         | ❌                |
-| `updateInterval`     | _Optional_ Sets the Update Interval int <br><br>**Type:** `int`(milliseconds) <br> **Default** 60000 milliseconds (1 minute)                                                                  | \* (API result is always cached for 1 Min)                      | ✅                |
-| `displayTimeOption`  | _Optional_ Changes the type of time <br><br>**Type:** `String` (**default**: 'countdown')                                                                                                     | `'time'`, `'time+countdown'`, `'countdown'`                     | ❌                |
-| `setWidth`           | _Optional_ Sets the width of the module in pixel <br><br>**Type:** `int` (**default**: false)                                                                                                 | Any posible size like: `450`                                    | ❌                |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | ---------------- |
+| `city`               | _Required_ German City Name <br><br>**Type:** `String` (**default**: Düsseldorf)                                                                                                              | Any City Name in North Rhine-Westphalia                         | ✅               |
+| `station`            | _Required_ German Station Name <br><br>**Type:** `String` (**default**: Hauptbahnhof)                                                                                                         | Any Station Name in North Rhine-Westphalia                      | ✅               |
+| `numberOfResults`    | _Optional_ Number of results to be displayed <br><br>**Type:** `Int` (**default**: 10)                                                                                                        | \*                                                              | ✅               |
+| `displayType`        | _Optional_ Changes the display type <br><br>**Type:** `String` (**default**: 'detail')                                                                                                        | `'detail'`, `'lcd'`                                             | ✅               |
+| `displayIcons`       | _Optional_ Display fontawsome icons <br><br>**Type:** `boolean` (**default**: true)                                                                                                           | `false`                                                         | ❌               |
+| `updateInterval`     | _Optional_ Sets the Update Interval int <br><br>**Type:** `int`(milliseconds) <br> **Default** 60000 milliseconds (1 minute)                                                                  | \* (API result is always cached for 1 Min)                      | ✅               |
+| `displayTimeOption`  | _Optional_ Changes the type of time <br><br>**Type:** `String` (**default**: 'countdown')                                                                                                     | `'time'`, `'time+countdown'`, `'countdown'`                     | ❌               |
+| `setWidth`           | _Optional_ Sets the width of the module in pixel <br><br>**Type:** `int` (**default**: false)                                                                                                 | Any posible size like: `450`                                    | ❌               |
 | `lcdWidth`           | _Optional_ Sets the width of the lcd display type <br><br>**Type:** `int` (**default**: 450)                                                                                                  | any possible size                                               | ✅               |
-| `scrollAfter`        | _Optional_ Scrolls the destination text after the specified characters <br><br>**Type:** `int` (**default**: false)                                                                           | any possible size or `false`                                    | ❌                |
-| `withoutDestination` | _Optional_ Only show results without destination. Supports a list of strings, separated by comma (","). <br><br>**Type:** `list of strings` (**default**: empty list (show all destinations)) | any possible list (e.g., ["Aachen, Hbf,Aachen","Duisburg Hbf"]) | ❌                |
+| `scrollAfter`        | _Optional_ Scrolls the destination text after the specified characters <br><br>**Type:** `int` (**default**: false)                                                                           | any possible size or `false`                                    | ❌               |
+| `withoutDestination` | _Optional_ Only show results without destination. Supports a list of strings, separated by comma (","). <br><br>**Type:** `list of strings` (**default**: empty list (show all destinations)) | any possible list (e.g., ["Aachen, Hbf,Aachen","Duisburg Hbf"]) | ❌               |
 | `platform`           | _Optional_ Only show platform. Supports multiple strings, separated by comma (","). <br><br>**Type:** `string` (**default**: empty (show all platforms))                                      | any possible string (e.g., "2,3")                               | ✅               |
 | `line`               | _Optional_ Only show lines that start with the given string. Supports multiple strings, separated by comma (","). <br><br>**Type:** `string` (**default**: empty (i.e., show all lines))      | any possible string (e.g., "RB33,U")                            | ✅               |
 
@@ -69,12 +69,12 @@ If you like my module and want to thank, you could consider:
 Currently only `de` and `en` is supported. Gets the Value from the Global Magic Mirror language config.
 
 ## "LCD" Display
+
 This view can be set if `displayType: 'lcd'` has been set.
 
 **Not all config parameters are supported in this mode. Check the parameters within the "Configuration options" table.**
 
 ![lcd](mmm-vrr.png)</br>
-
 
 ## Visualization of the scrollAfter option
 
