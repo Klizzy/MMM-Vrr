@@ -1,0 +1,45 @@
+name: "Run MagicMirror Automated Tests"
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          repository: MichMich/MagicMirror
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+      - name: Checkout MMM-Vrr
+        uses: actions/checkout@v3
+        with:
+          path: modules/MMM-Vrr
+      - name: Install MMR-Vrr dependencies
+        run: |
+          cd modules/MMM-Vrr && npm install
+      - name: Install dependencies and run tests
+        run: |
+          Xvfb :99 -screen 0 1024x768x16 &
+          export DISPLAY=:99
+          npm run install-mm:dev
+          touch css/custom.css
+          npm run test:prettier
+          npm run test:js
+          npm run test:css
+          npm run test
