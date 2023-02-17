@@ -1,4 +1,4 @@
-name: "Run MagicMirror Automated Tests"
+name: "MagicMirror² & MMM-Vrr setup + tests"
 
 on:
   push:
