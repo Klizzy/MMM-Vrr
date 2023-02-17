@@ -8,6 +8,8 @@ Displays the next departure times of Trains, subway and Buses from any city and 
 
 This module was intended for VRR, but it also supports the [following](#efa) Areas.
 
+If you like this module, consider to give this project a :star: on GitHub to show support.
+
 ![displayType detail](mmm-vrr-table.png) &nbsp;&nbsp; ![displayType digital](mmm-vrr.png)
 
 ## Installation
