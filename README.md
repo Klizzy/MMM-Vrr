@@ -4,9 +4,9 @@
 
 This is a module for the [MagicMirror²](https://github.com/MichMich/MagicMirror/).
 
-Displays the next departure times of Trains, subway and Buses from any city and station in the german federal state North Rhine-Westphalia (VRR).
+This module is designed to provide users with up-to-date information about the upcoming departure times of trains, subways, and buses from any station in the North Rhine-Westphalia VRR region of Germany.
 
-This module was intended for VRR, but it also supports the [following](#efa) Areas.
+This module was intended for the public transport of VRR, but it also supports the [following](#efa) areas.
 
 If you like this module, consider to give this project a :star: on GitHub to show support.
 
@@ -91,7 +91,7 @@ If you set `scrollAfter:15`, the text will be scrolled horizontally if it has 15
 **Please keep in mind, that everything besides VRR is not full supported.**
 You can check your station and city combination beforehand [here](https://github.com/Klizzy/MMM-Vrr#-check-if-your-station-is-supported)
 
-Possible Side effects for not VRR Areas:
+Possible Side effects for non VRR areas:
 
 - Icons don't match correctly
 - not all configured transport types hide correctly
@@ -128,12 +128,12 @@ Possible Side effects for not VRR Areas:
 
 ## <a name="check"></a> Check if your station is supported
 
-This application uses the provided API from [vrrf.finalrewind.org](https://vrrf.finalrewind.org). If your desired station and city combination returns a result, its highly possible that MMM-Vrr supoorts it also
+This application uses the provided API from [vrrf.finalrewind.org](https://vrrf.finalrewind.org). If your desired station and city combination returns a result, its highly possible that MMM-Vrr supoorts it also.
 
 ## Feedback
 
-It's my first Open Source Project, so it would be nice if you share your experience with this module with me <a href="mailto:steven.zemelka@gmail.com">steven.zemelka@gmail.com</a>!
-Feel free to suggest additional features and / or improvements.
+It's my first Open Source Project, so it would be nice if you share your experience with this module with me <a href="mailto:hello@klizzy.com">hello@klizzy.com</a>!
+Feel free to suggest additional features and / or improvements trough a Github issue.
 
 ## Changelog
 
