@@ -8,7 +8,7 @@ This module is designed to provide users with up-to-date information about the u
 
 This module was intended for the public transport of VRR, but it also supports the [following](#efa) areas.
 
-If you like this module, consider to give this project a :star: on GitHub to show support.
+If you like this module, consider to give this project a :star: on GitHub to show support. 
 
 ![displayType detail](mmm-vrr-table.png) &nbsp;&nbsp; ![displayType digital](mmm-vrr.png)
 
