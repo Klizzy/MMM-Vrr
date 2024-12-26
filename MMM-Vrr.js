@@ -93,27 +93,33 @@ Module.register("MMM-Vrr", {
    */
   getData: function () {
     let self = this;
-
+  
     let urlApi = this.getUrl();
     let retry = true;
-
+  
     let dataRequest = new XMLHttpRequest();
     dataRequest.open("GET", urlApi, true);
     dataRequest.onreadystatechange = function () {
       if (this.readyState === 4) {
         if (this.status === 200) {
-          self.processData(JSON.parse(this.response));
+          Log.info(self.name + ": Data successfully loaded.");
+          let data = JSON.parse(this.response);
+          Log.info(self.name + ": Data to be processed: " + JSON.stringify(data));
+          self.processData(data);
         } else if (this.status === 401) {
           self.updateDom(self.config.animationSpeed);
-          Log.error(self.name, this.status);
+          Log.error(self.name + ": Unauthorized access. Status: " + this.status);
           retry = false;
         } else {
-          Log.error(self.name, "Could not load data.");
+          Log.error(self.name + ": Could not load data. Status: " + this.status + ", Status Text: " + this.statusText + ", Response: " + this.responseText);
         }
         if (retry) {
           self.scheduleUpdate(self.loaded ? -1 : self.config.retryDelay);
         }
       }
+    };
+    dataRequest.onerror = function () {
+      Log.error(self.name + ": API request failed. URL: " + urlApi);
     };
     dataRequest.send();
   },
@@ -408,6 +414,9 @@ Module.register("MMM-Vrr", {
         break;
       case "TaxiBus":
         symbolType = "taxi";
+        break;
+      case "Stadtbahn":
+        symbolType = "subway"; 
         break;
       default:
         symbolType = "bus";
